@@ -1,0 +1,14 @@
+{
+  "name": "alanplotko.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:alanplotko/alanplotko.github.io.git",
+  "author": "Alan Plotko <5394528+alanplotko@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-jsonmin": "^1.2.0",
+    "workbox-build": "^6.4.2"
+  }
+}
