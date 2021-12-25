@@ -15,7 +15,7 @@ jobs:
     - name: Set up Ruby and Bundler
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7.0
+        ruby-version: 2.7
         bundler-cache: true
 
     - name: Set up Node.js
@@ -23,9 +23,12 @@ jobs:
       with:
         node-version: '15.x'
         cache: 'yarn'
+    
+    - name: Install yarn
+      run: npm i yarn -g
 
     - name: Install dependencies
-      run: yarn install --frozen-lockfile
+      run: yarn install
 
     - name: Run build
       run: yarn build
@@ -34,4 +37,18 @@ jobs:
       run: yarn gulp
 
     - name: Deploy to gh-pages
-      run: bash buildDeploy.sh
+      run: |
+        DEST="_site"
+        REPO="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+        BRANCH="gh-pages"
+
+        echo "Publishing..."
+
+        cd ${DEST}
+
+        git init
+        git config user.name "${GITHUB_ACTOR}"
+        git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        git add .
+        git commit -m "Published by GitHub Actions"
+        git push --force ${REPO} master:${BRANCH}
