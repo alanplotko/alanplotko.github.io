@@ -1,5 +1,5 @@
 url: http://localhost:4000
-exclude: ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/", "gulpfile.js", "reports/", "package.json", "yarn.lock"]
+exclude: ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/", "gulpfile.js", "reports/", "package.json", "yarn.lock", "README.md"]
 include: [".nojekyll"]
 plugins:
   - jekyll-sitemap
