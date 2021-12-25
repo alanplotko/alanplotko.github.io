@@ -6,19 +6,6 @@ DEST="${JEKYLL_DESTINATION:-_site}"
 REPO="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 BRANCH="gh-pages"
 
-echo "Installing gems..."
-
-bundle config path vendor/bundle
-bundle install
-
-echo "Building Jekyll site..."
-
-JEKYLL_ENV=production NODE_ENV=production bundle exec jekyll build
-
-echo "Running gulp..."
-
-./node_modules/.bin/gulp
-
 echo "Publishing..."
 
 cd ${DEST}
