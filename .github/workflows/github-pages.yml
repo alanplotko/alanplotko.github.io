@@ -9,17 +9,40 @@ jobs:
   jekyll:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
 
-    # Use GitHub Actions' cache to shorten build times and decrease load on servers
-    - uses: actions/cache@v2
+    - name: Set up Ruby and Bundler
+      uses: ruby/setup-ruby@v1
       with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
+        ruby-version: 2.7
+        bundler-cache: true
 
-    - uses: helaili/jekyll-action@v2
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        target_branch: 'gh-pages'
+        node-version: '15.x'
+        cache: 'yarn'
+
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Run production build
+      run: yarn prod
+
+    - name: Deploy to gh-pages
+      run: |
+        DEST="_site"
+        REPO="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+        BRANCH="gh-pages"
+
+        echo "Publishing..."
+
+        cd ${DEST}
+
+        git init
+        git config user.name "${GITHUB_ACTOR}"
+        git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        git add .
+        git commit -m "Published by GitHub Actions"
+        git push --force ${REPO} master:${BRANCH}
