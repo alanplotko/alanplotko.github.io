@@ -23,18 +23,12 @@ jobs:
       with:
         node-version: '15.x'
         cache: 'yarn'
-    
-    - name: Install yarn
-      run: npm i yarn -g
 
     - name: Install dependencies
       run: yarn install
 
-    - name: Run build
-      run: yarn build
-
-    - name: Run gulp
-      run: yarn gulp
+    - name: Run production build
+      run: yarn prod
 
     - name: Deploy to gh-pages
       run: |
