@@ -5,6 +5,13 @@
   "repository": "git@github.com:alanplotko/alanplotko.github.io.git",
   "author": "Alan Plotko <5394528+alanplotko@users.noreply.github.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "bundle exec jekyll build --config _config.yml",
+    "build-dev": "bundle exec jekyll build --config _config-dev.yml",
+    "serve": "bundle exec jekyll serve --skip-initial-build --no-watch",
+    "gulp": "./node_modules/.bin/gulp",
+    "lighthouse": "lighthouse http://localhost:4000 --preset=desktop --quiet --chrome-flags='--headless' --view --output-path ./reports/lighthouse-desktop.html && http://localhost:4000 --quiet --chrome-flags='--headless' --view --output-path ./reports/lighthouse-mobile.html"
+  },
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-htmlmin": "^5.0.1",

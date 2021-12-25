@@ -1,3 +1,4 @@
+url: https://www.alanplotko.com
 exclude: ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/", "gulpfile.js", "Makefile", "reports/", "package.json", "yarn.lock"]
 plugins:
   - jekyll-sitemap

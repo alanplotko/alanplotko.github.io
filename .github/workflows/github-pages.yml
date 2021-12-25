@@ -9,17 +9,29 @@ jobs:
   jekyll:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
 
-    # Use GitHub Actions' cache to shorten build times and decrease load on servers
-    - uses: actions/cache@v2
+    - name: Set up Ruby and Bundler
+      uses: ruby/setup-ruby@v1
       with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
+        ruby-version: 2.7.0
+        bundler-cache: true
 
-    - uses: helaili/jekyll-action@v2
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        target_branch: 'gh-pages'
+        node-version: '15.x'
+        cache: 'yarn'
+
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile
+
+    - name: Run build
+      run: yarn build
+
+    - name: Run gulp
+      run: yarn gulp
+
+    - name: Deploy to gh-pages
+      run: bash buildDeploy.sh
