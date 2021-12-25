@@ -3,7 +3,7 @@ all: build serve
 build: site gulp
 
 site:
-	bundle exec jekyll build
+	bundle exec jekyll build --config _config-dev.yml
 
 gulp:
 	./node_modules/.bin/gulp
