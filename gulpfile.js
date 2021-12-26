@@ -13,6 +13,20 @@ function serviceWorker() {
         ignoreURLParametersMatching: [
             /^utm_/,
             /^fbclid$/
+        ],
+        runtimeCaching: [
+            {
+                urlPattern: /^https?:\/\/cdnjs.cloudflare.com/,
+                handler: 'StaleWhileRevalidate',
+            },
+            {
+                urlPattern: /^https?:\/\/fonts.googleapis.com/,
+                handler: 'StaleWhileRevalidate',
+            },
+            {
+                urlPattern: /^https?:\/\/fonts.gstatic.com/,
+                handler: 'StaleWhileRevalidate',
+            }
         ]
     });
 }
