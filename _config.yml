@@ -1,4 +1,5 @@
 url: https://www.alanplotko.com
+google_analytics: UA-104911692-1
 exclude: ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/", "gulpfile.js", "reports/", "package.json", "yarn.lock", "README.md"]
 include: [".nojekyll"]
 plugins:
