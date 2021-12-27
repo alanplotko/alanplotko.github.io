@@ -4,3 +4,9 @@ exclude: ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/c
 include: [".nojekyll"]
 plugins:
   - jekyll-sitemap
+defaults:
+  -
+    scope:
+      path: 'assets/**'
+    values:
+      sitemap: false
