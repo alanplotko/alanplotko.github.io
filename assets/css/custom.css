@@ -1,0 +1,76 @@
+/* Custom CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+
+/* Larger than phablet (also point when grid becomes active) */
+
+@media (min-width: 550px) {
+    .container h1 {
+        font-size: 6rem;
+    }
+}
+
+body {
+    background-color: #222;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    color: #fff;
+}
+
+#particles {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+
+/* Main content */
+
+.container .main {
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+
+/* Headers */
+
+.container h1 {
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+
+/* Link icons */
+
+.container svg {
+    margin: 0 8px;
+    width: 4.8rem;
+    height: 4.8rem;
+    stroke-width: 0;
+    stroke: #fff;
+    fill: #fff;
+}
+
+#contact {
+    visibility: hidden;
+    width: fit-content;
+    margin: 35px auto 0;
+    text-align: center;
+    color: #000;
+    font-size: 1.5rem;
+}
+
+pre#contact>code {
+    padding: 1rem 5rem;
+}
+
+#contact.active {
+    visibility: initial;
+}
