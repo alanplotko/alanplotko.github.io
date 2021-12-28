@@ -7,3 +7,6 @@ source "https://rubygems.org"
 gem "github-pages", "~> 222"
 
 gem "jekyll-sitemap", "~> 1.4"
+
+gem "jekyll-paginate-v2", "~> 3.0"
+
