@@ -1127,3 +1127,19 @@ a.sidebar-nav-item:focus {
         margin-right: 22rem;
     }
 }
+
+/** Custom CSS
+ *
+ * Added for bootstrap compatibility
+ */
+
+.text-muted svg {
+    fill: #6c757d;
+    width: 1rem;
+    height: 1rem;
+    vertical-align: middle;
+}
+
+.text-muted svg + span {
+    vertical-align: middle;
+}
