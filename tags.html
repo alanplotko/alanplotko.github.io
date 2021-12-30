@@ -1,0 +1,16 @@
+---
+layout: page
+title: Tags
+permalink: /blog/tags/
+---
+
+<div>
+    <ul>
+        {%- for tag in site.tags -%}
+        <li>
+            <a href="{{ site.baseurl | append: 'blog' }}/tags/{{ tag[0] }}">{{ tag[0] }}</a>
+            <small class="text-muted">({{ tag[1].size }} post{%- if tag[1].size > 1 -%}s{%- endif -%})</small>
+        </li>
+        {%- endfor -%}
+    </ul>
+</div>

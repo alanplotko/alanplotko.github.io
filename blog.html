@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Blog
-permalink: /blog
+permalink: /blog/
 pagination:
     enabled: true
 ---
@@ -62,10 +62,10 @@ pagination:
 
     <div id="side-content" class="col">
         <div class="section-recent-posts ps-3">
-            {%- include recent_posts.html -%}
+            {%- include section_recent_posts.html -%}
         </div>
         <div class="section-tags ps-3">
-            {%- include tags.html moduloEnabled=true title='Trending Tags' -%}
+            {%- include section_tags.html moduloEnabled=true title='Trending Tags' -%}
         </div>
     </div>
 </div>

@@ -6,6 +6,10 @@
         {%- elsif page.url contains '/blog/page/' -%}
         <li class="breadcrumb-item"><a href="{{ site.baseurl | append: 'blog' }}">Blog</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ include.title | split: '-' | last }}</li>
+        {%- elsif page.url != '/blog/tags/' and page.url contains '/blog/tags/' -%}
+        <li class="breadcrumb-item"><a href="{{ site.baseurl | append: 'blog' }}">Blog</a></li>
+        <li class="breadcrumb-item"><a href="{{ site.baseurl | append: 'blog' }}/tags">Tags</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ include.title }}</li>
         {%- else -%}
         <li class="breadcrumb-item"><a href="{{ site.baseurl | append: 'blog' }}">Blog</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ include.title }}</li>

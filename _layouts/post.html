@@ -10,8 +10,8 @@ layout: default
             {{ content }}
         </div>
         <hr />
-        {%- include recent_posts.html -%}
-        {%- include tags.html tags=page.tags moduloEnabled=false title='Post Tags' -%}
+        {%- include section_tags.html tags=page.tags moduloEnabled=false title='Post Tags' -%}
+        {%- include section_recent_posts.html -%}
     </div>
     <div id="side-content" class="col">
         Placeholder
