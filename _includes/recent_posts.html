@@ -1,0 +1,19 @@
+{%- if page.url == '/blog/index.html' or page.url contains "/blog/page/" -%}
+{%- assign recentPosts = site.posts | limit: 5 -%}
+{%- elsif site.related_posts.size > 0 -%}
+{%- assign recentPosts = site.related_posts | sort: 'date' | reverse | limit: 5 -%}
+{%- else -%}
+{%- assign recentPosts = [] -%}
+{%- endif -%}
+
+{%- if recentPosts.size > 0 -%}
+<h2>{{ include.title | default: 'Recent Posts' }}</h2>
+<ul>
+    {%- for post in recentPosts -%}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+        <small class="text-muted">{{ post.date | date_to_string }}</small>
+    </li>
+    {%- endfor -%}
+</ul>
+{%- endif -%}

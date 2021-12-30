@@ -1,8 +1,17 @@
 const gulp = require('gulp');
 const htmlmin = require('gulp-htmlmin');
 const jsonmin = require('gulp-jsonmin');
-const cleanCSS = require('gulp-clean-css');
+const sass = require('gulp-sass')(require('sass'));
+const purgecss = require('gulp-purgecss');
+const cp = require('child_process');
 const workboxBuild = require('workbox-build');
+
+// Derive Jekyll environment from environment variable
+const env = process.env.JEKYLL_ENV == 'production' ? 'prod' : 'dev';
+
+/**
+ * Service worker setup with workbox for precaching and runtime caching
+ */
 
 function serviceWorker() {
     return workboxBuild.generateSW({
@@ -29,7 +38,11 @@ function serviceWorker() {
     });
 }
 
-function minifyHTML() {
+/**
+ * Build assets
+ */
+
+function buildHtml() {
     return gulp.src('./_site/**/*.{html,svg}')
         .pipe(htmlmin({
             collapseWhitespace: true,
@@ -44,37 +57,85 @@ function minifyHTML() {
         .pipe(gulp.dest('./_site'));
 }
 
-function minifyCSS() {
-    return gulp.src('./_site/**/*.css')
-        .pipe(cleanCSS({
-            level: {
-                2: {
-                    mergeAdjacentRules: true, // controls adjacent rules merging; defaults to true
-                    mergeIntoShorthands: true, // controls merging properties into shorthands; defaults to true
-                    mergeMedia: true, // controls `@media` merging; defaults to true
-                    mergeNonAdjacentRules: true, // controls non-adjacent rule merging; defaults to true
-                    mergeSemantically: true, // controls semantic merging; defaults to false
-                    overrideProperties: true, // controls property overriding based on understandability; defaults to true
-                    removeEmpty: true, // controls removing empty rules and nested blocks; defaults to `true`
-                    reduceNonAdjacentRules: true, // controls non-adjacent rule reducing; defaults to true
-                    removeDuplicateFontRules: true, // controls duplicate `@font-face` removing; defaults to true
-                    removeDuplicateMediaBlocks: true, // controls duplicate `@media` removing; defaults to true
-                    removeDuplicateRules: true, // controls duplicate rules removing; defaults to true
-                    removeUnusedAtRules: false, // controls unused at rule removing; defaults to false (available since 4.1.0)
-                    restructureRules: false, // controls rule restructuring; defaults to false
-                    skipProperties: [] // controls which properties won't be optimized, defaults to `[]` which means all will be optimized (since 4.1.0)
-                }
-            }
-        }))
-        .pipe(gulp.dest('./_site'));
+function buildSass() {
+    return gulp.src('./assets/css/*.scss')
+        .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(gulp.dest('./_site/assets/css'));
 }
 
-function minifyJSON() {
+function buildJson() {
     return gulp.src('./_site/**/*.json')
         .pipe(jsonmin())
         .pipe(gulp.dest('./_site'));
 }
 
-const build = gulp.series(gulp.parallel(minifyHTML, minifyCSS, minifyJSON), serviceWorker);
 
-exports.default = build;
+function buildYaml(cb) {
+    cp.exec(`./node_modules/.bin/yaml-merge _config/common.yml _config/${env}.yml > _config-${env}.yml`, function(err, stdout, stderr) {
+        if (stdout) console.log(stdout);
+        if (stderr) console.log(stderr);
+        cb(err);
+    });
+}
+
+/**
+ * Purge unused CSS to minimize resource size in production
+ */
+
+function cleanCSS() {
+    return gulp.src('./_site/**/*.css')
+        .pipe(purgecss({
+            content: ['./_site/**/*.html']
+        }))
+        .pipe(gulp.dest('./_site'));
+}
+
+/**
+ * Watch assets and rebuild Jekyll for local development
+ */
+
+function watchHtml() {
+    gulp.watch(['./*.html', './_includes/*.html', './_layouts/*.html'], gulp.series(buildJekyll, buildHtml));
+}
+
+function watchSass() {
+    gulp.watch('./assets/css/*.{css,scss}', gulp.series(buildJekyll, buildSass));
+}
+
+function watchJson() {
+    gulp.watch('./assets/json/*.json', gulp.series(buildJekyll, buildJson));
+}
+
+function watchYaml() {
+    gulp.watch('./_config/*.yml', gulp.series(buildYaml, buildJekyll));
+}
+
+function buildJekyll(cb) {
+    cp.exec(`bundle exec jekyll build --config _config-${env}.yml`, function(err, stdout, stderr) {
+        if (stdout) console.log(stdout);
+        if (stderr) console.log(stderr);
+        cb(err);
+    });
+}
+
+function serveJekyll(cb) {
+    cp.exec(`bundle exec jekyll serve --skip-initial-build --config _config-${env}.yml`, function(err, stdout, stderr) {
+        if (stdout) console.log(stdout);
+        if (stderr) console.log(stderr);
+        cb(err);
+    });
+}
+
+// Build: build yaml, build Jekyll, and build assets together. For prod, additionally purge unused css and set up the service worker.
+exports.build = env == 'prod' ?
+    gulp.series(buildYaml, buildJekyll, gulp.parallel(buildHtml, buildSass, buildJson), cleanCSS, serviceWorker) :
+    gulp.series(buildYaml, buildJekyll, gulp.parallel(buildHtml, buildSass, buildJson));
+
+// Serve: serve Jekyll, watch assets, and rebuild on changes.
+exports.serve = gulp.parallel(serveJekyll, watchHtml, watchSass, watchJson, watchYaml);
+
+// Build yaml only
+exports.yaml = buildYaml;
+
+// Default to build job
+exports.default = exports.build;

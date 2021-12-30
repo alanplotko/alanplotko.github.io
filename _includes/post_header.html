@@ -1,0 +1,24 @@
+{%- include reading_time.html content=include.reading_content -%}
+<h1 class="post-title">
+    {%- if include.hyperlink -%}
+    <a href="{{ include.post.url }}">
+        {{ include.post.title }}
+    </a>
+    {%- else -%}
+    {{ include.post.title }}
+    {%- endif -%}
+</h1>
+<div class="meta small text-muted d-flex flex-row justify-content-start align-items-center">
+    <div class="me-4">
+        <svg class="me-1 align-middle">
+            <use xlink:href="/assets/svg/symbol-defs.svg#icon-calendar-o"></use>
+        </svg>
+        <span class="align-middle">{{ include.post.date | date_to_string }}</span>
+    </div>
+    <div class="me-4">
+        <svg class="me-1 align-middle">
+            <use xlink:href="/assets/svg/symbol-defs.svg#icon-clock-o"></use>
+        </svg>
+        <span class="align-middle">{{ reading_time }}</span>
+    </div>
+</div>

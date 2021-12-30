@@ -2,24 +2,18 @@
 layout: default
 ---
 
-<div class="post">
-  <h1 class="post-title">{{ page.title }}</h1>
-  <span class="post-date">{{ page.date | date_to_string }}</span>
-  {{ content }}
-</div>
-
-<div class="related">
-  <h2>Related Posts</h2>
-  <ul class="related-posts">
-    {%- for post in site.related_posts limit:3 -%}
-      <li>
-        <h3>
-          <a href="{{ post.url }}">
-            {{ post.title }}
-            <small>{{ post.date | date_to_string }}</small>
-          </a>
-        </h3>
-      </li>
-    {%- endfor -%}
-  </ul>
+<div class="row gx-5">
+    <div id="post-content" class="col-xl-12 col-xxl-10">
+        {%- include breadcrumbs.html title=page.title -%}
+        <div class="post pt-2">
+            {%- include post_header.html reading_content=content post=page -%}
+            {{ content }}
+        </div>
+        <hr />
+        {%- include recent_posts.html -%}
+        {%- include tags.html tags=page.tags moduloEnabled=false title='Post Tags' -%}
+    </div>
+    <div id="side-content" class="col">
+        Placeholder
+    </div>
 </div>

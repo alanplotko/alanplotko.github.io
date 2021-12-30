@@ -1,0 +1,14 @@
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ site.baseurl }}">Home</a></li>
+        {%- if page.url == '/blog/index.html' -%}
+        <li class="breadcrumb-item active" aria-current="page">{{ include.title }}</li>
+        {%- elsif page.url contains '/blog/page/' -%}
+        <li class="breadcrumb-item"><a href="{{ site.baseurl | append: 'blog' }}">Blog</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ include.title | split: '-' | last }}</li>
+        {%- else -%}
+        <li class="breadcrumb-item"><a href="{{ site.baseurl | append: 'blog' }}">Blog</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ include.title }}</li>
+        {%- endif -%}
+    </ol>
+</nav>

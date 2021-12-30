@@ -1,0 +1,179 @@
+@import "assets/css/poole";
+@import "assets/css/syntax";
+@import "assets/css/hyde";
+
+/* Font overrides
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+// Body font
+html,
+.sidebar-about h1,
+.pagination {
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+}
+
+// Code font
+code,
+pre,
+.gist .gist-file {
+    font-family: "Roboto Mono", "Courier New", monospace;
+}
+
+/* Cards for blog posts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.meta {
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+.meta svg {
+    fill: #6c757d;
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Bootstrap section
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+$primary: #268bd2;
+$secondary: #222;
+
+@import "node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/root";
+@import "node_modules/bootstrap/scss/mixins";
+@import "node_modules/bootstrap/scss/utilities";
+@import "node_modules/bootstrap/scss/utilities/api";
+@import "node_modules/bootstrap/scss/list-group";
+@import "node_modules/bootstrap/scss/breadcrumb";
+@import "node_modules/bootstrap/scss/grid";
+@import "node_modules/bootstrap/scss/containers";
+@import "node_modules/bootstrap/scss/badge";
+@import "node_modules/bootstrap/scss/helpers/position";
+@import "node_modules/bootstrap/scss/pagination";
+
+/* Bootstrap overrides
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+// Inherit font color from body
+.list-group-item {
+    color: inherit;
+}
+
+/* About section
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+#sidebar {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $secondary;
+    text-align: left;
+    padding: 2.5rem 2rem;
+    color: rgba(255, 255, 255, 0.5);
+    width: 360px;
+}
+
+#sidebar a {
+    color: #fff;
+}
+
+#post-content {
+    max-width: 720px;
+}
+
+#side-content {
+    min-width: 360px;
+}
+
+#side-content .sticky-top {
+    top: 100px;
+}
+
+
+// Logo at 100px
+.sidebar-logo {
+    width: 100px;
+    height: 100px;
+}
+
+.sidebar-about h1 {
+    font-size: 2.5rem;
+}
+
+.posts.list-group-flush > .list-group-item:last-child {
+    border-width: 0 0 1px;
+}
+
+.badge.tag {
+    background-color: $gray-600;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tags .break {
+    flex-basis: 100%;
+    height: 0;
+}
+
+#main {
+    padding: 80px 100px 80px 460px;
+}
+
+@include media-breakpoint-up(xxl) {
+    #side-content > div {
+        border-left: 1px solid $gray-300;
+        margin-bottom: 3rem;
+    }
+}
+
+@include media-breakpoint-down(xxl) {
+    #side-content > div {
+        border-left: none;
+    }
+}
+
+@include media-breakpoint-down(xl) {
+    #main {
+        padding: 80px 60px 80px 420px;
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    #sidebar {
+        width: 288px;
+    }
+
+    #main {
+        padding: 64px 48px 64px 336px;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    #main {
+        padding: 80px 20px;
+    }
+
+    // Center logo when sidebar collapses in responsive mobile view
+    .sidebar-logo {
+        margin: 0 auto 1rem auto;
+    }
+
+    #sidebar {
+        position: unset;
+        text-align: center;
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    // Center logo when sidebar collapses in responsive mobile view
+    .sidebar-logo {
+        margin: 0 auto 1rem auto;
+    }
+}
