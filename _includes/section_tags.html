@@ -16,7 +16,7 @@
         {%- capture tagName -%}{{ tag }}{%- endcapture -%}
         {%- capture label -%}{{ tag }}{%- endcapture -%}
     {%- endif -%}
-    <a class="badge tag mt-1 me-1 mb-1" href="{{ site.baseurl | append: 'blog' }}/tags/{{ tagName }}">{{ label }}</a>
+    <a class="badge tag mt-2 me-2 mb-2" href="{{ site.baseurl | append: 'blog' }}/tags/{{ tagName }}">{{ label }}</a>
     {%- if include.moduloEnabled -%}
         {%- assign separatorCount = include.separatorCount | default: 3 -%}
         {%- assign mod = forloop.index | modulo: separatorCount -%}

@@ -19,32 +19,19 @@ pre,
     font-family: "Roboto Mono", "Courier New", monospace;
 }
 
-/* Cards for blog posts
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-.meta {
-    margin-top: -0.5rem;
-    margin-bottom: 1rem;
-}
-
-.meta svg {
-    fill: #6c757d;
-    width: 1rem;
-    height: 1rem;
-}
-
 /* Bootstrap section
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-$primary: #268bd2;
+$primary: #0d6efd;
 $secondary: #222;
 
 @import "node_modules/bootstrap/scss/functions";
-@import "../../node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/variables";
 @import "node_modules/bootstrap/scss/root";
 @import "node_modules/bootstrap/scss/mixins";
 @import "node_modules/bootstrap/scss/utilities";
 @import "node_modules/bootstrap/scss/utilities/api";
+@import "node_modules/bootstrap/scss/nav";
 @import "node_modules/bootstrap/scss/list-group";
 @import "node_modules/bootstrap/scss/breadcrumb";
 @import "node_modules/bootstrap/scss/grid";
@@ -62,7 +49,33 @@ $secondary: #222;
     color: inherit;
 }
 
-/* About section
+// Add bottom border to list groups for main post listing on blog page, recent posts section, and tag directory page
+.posts.list-group-flush > .list-group-item:last-child,
+.recent-posts.list-group-flush > .list-group-item:last-child,
+.tags-list.list-group-flush > .list-group-item:last-child {
+    border-width: 0 0 1px;
+}
+
+// Set all links to primary bootstrap color
+a {
+    color: $primary;
+}
+
+/* Post meta information
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.meta {
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+.meta svg {
+    fill: #6c757d;
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Sidebar
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 #sidebar {
@@ -82,35 +95,115 @@ $secondary: #222;
     color: #fff;
 }
 
+// Logo at 100px
+#sidebar .sidebar-logo {
+    width: 100px;
+    height: 100px;
+}
+
+#sidebar .sidebar-about h1 {
+    font-size: 2.5rem;
+}
+
+@include media-breakpoint-down(lg) {
+    #sidebar {
+        width: 288px;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    #sidebar {
+        position: unset;
+        text-align: center;
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    // Center logo when sidebar collapses in responsive mobile view
+    .sidebar-logo {
+        margin: 0 auto 1rem auto;
+    }
+
+    // Center logo when sidebar collapses in responsive mobile view
+    .sidebar-logo {
+        margin: 0 auto 1rem auto;
+    }
+}
+
+/* Content: Outer Column
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+#main {
+    padding: 80px 100px 80px 460px;
+}
+
+@include media-breakpoint-down(xl) {
+    #main {
+        padding: 80px 60px 80px 420px;
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    #main {
+        padding: 64px 48px 64px 336px;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    #main {
+        padding: 80px 20px;
+    }
+}
+
+/* Content: First Inner Column
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
 #post-content {
     max-width: 720px;
+}
+
+/* Content: Second Inner Column
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+#side-content .section-toc {
+    top: 100px;
+    background-color: $light;
+    max-width: fit-content;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+#side-content .section-toc .toc-post-title li,
+#side-content .section-toc #toc,
+#side-content .section-toc #toc li {
+    background-color: $light;
 }
 
 #side-content {
     min-width: 360px;
 }
 
-#side-content .sticky-top {
-    top: 100px;
+/* Table of Contents
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+#toc ul li:last-child {
+    padding-bottom: 0px;
 }
 
-
-// Logo at 100px
-.sidebar-logo {
-    width: 100px;
-    height: 100px;
+#toc {
+    margin-left: 10px;
 }
 
-.sidebar-about h1 {
-    font-size: 2.5rem;
+#toc li {
+    margin-left: -10px;
 }
 
-.posts.list-group-flush > .list-group-item:last-child {
-    border-width: 0 0 1px;
-}
+/* Tags
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 .badge.tag {
     background-color: $gray-600;
+    font-size: 0.75rem;
 }
 
 .tags {
@@ -123,58 +216,152 @@ $secondary: #222;
     height: 0;
 }
 
-#main {
-    padding: 80px 100px 80px 460px;
+/* Archive Styles (base from Chirpy theme)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+%date-timeline {
+    content: "";
+    width: 4px;
+    left: 75px;
+    display: block;
+    float: left;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.075);
 }
 
-@include media-breakpoint-up(xxl) {
-    #side-content > div {
-        border-left: 1px solid $gray-300;
-        margin-bottom: 3rem;
+.archives .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.archives {
+    letter-spacing: 0.48px;
+
+    span.lead {
+        font-size: 24px;
+        position: relative;
+        left: 8px;
+
+        &::after {
+            content: "";
+            display: block;
+            position: relative;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            top: -26px;
+            left: 63px;
+            border: 3px solid;
+            background-color: #fff;
+            border-color: #c2c6cc;
+            box-shadow: 0 0 2px 0 #c2c6cc;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        &:not(:first-child) {
+            position: relative;
+            left: 4px;
+
+            &::after {
+                left: 67px;
+            }
+        }
+    }
+
+    ul {
+        li {
+            font-size: 17.6px;
+            line-height: 48px;
+
+            div {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                a {
+                    margin-left: 40px;
+                    position: relative;
+                    top: 1.6px;
+                }
+            }
+
+            &:nth-child(odd) {
+                background-color: #fff;
+                background-image: linear-gradient(to left, #fff, #fbfbfb, #fbfbfb, #fbfbfb, #fff);
+            }
+
+            &::after {
+                @extend %date-timeline;
+
+                height: 44.8px;
+                top: -20.8px;
+            }
+
+            &:first-child::before {
+                @extend %date-timeline;
+
+                height: 48.96px;
+                top: -25.76px;
+            }
+        }
+
+        &:not(:last-child) > li:last-child::after {
+            height: 54.4px;
+        }
+
+        &:last-child > li:last-child::after {
+            display: none;
+        }
+    }
+
+    .date {
+        white-space: nowrap;
+        display: inline-block;
+
+        &.month {
+            width: 22.4px;
+            text-align: center;
+            font-size: 80%;
+
+            ~ a::before {
+                content: "";
+                display: block;
+                float: left;
+                position: relative;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                border-radius: 50%;
+                width: 8px;
+                height: 8px;
+                top: 21.6px;
+                left: 69px;
+                background-color: #c2c6cc;
+                box-shadow: 0 0 3px 0 #c2c6cc;
+                z-index: 1;
+            }
+        }
+
+        &.day {
+            font-size: 85%;
+            color: #212529;
+            text-align: center;
+            margin-right: -2px;
+            width: 19.2px;
+            position: relative;
+            left: -2.4px;
+        }
     }
 }
 
-@include media-breakpoint-down(xxl) {
-    #side-content > div {
-        border-left: none;
-    }
-}
+@media all and (max-width: 576px) {
+    .archives {
+        margin-top: -16px;
 
-@include media-breakpoint-down(xl) {
-    #main {
-        padding: 80px 60px 80px 420px;
-    }
-}
-
-@include media-breakpoint-down(lg) {
-    #sidebar {
-        width: 288px;
-    }
-
-    #main {
-        padding: 64px 48px 64px 336px;
-    }
-}
-
-@include media-breakpoint-down(md) {
-    #main {
-        padding: 80px 20px;
-    }
-
-    // Center logo when sidebar collapses in responsive mobile view
-    .sidebar-logo {
-        margin: 0 auto 1rem auto;
-    }
-
-    #sidebar {
-        position: unset;
-        text-align: center;
-        flex: 0 0 auto;
-        width: 100%;
-    }
-
-    // Center logo when sidebar collapses in responsive mobile view
-    .sidebar-logo {
-        margin: 0 auto 1rem auto;
+        ul {
+            letter-spacing: 0;
+        }
     }
 }

@@ -1,5 +1,5 @@
 {%- include reading_time.html content=include.reading_content -%}
-<h1 class="post-title">
+<h1{% if include.anchor %} id="post-title"{% endif %} class="post-title">
     {%- if include.hyperlink -%}
     <a href="{{ include.post.url }}">
         {{ include.post.title }}

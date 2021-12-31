@@ -7,7 +7,8 @@ const cp = require('child_process');
 const workboxBuild = require('workbox-build');
 
 // Derive Jekyll environment from environment variable
-const env = process.env.JEKYLL_ENV == 'production' ? 'prod' : 'dev';
+const env = process.env.JEKYLL_ENV;
+const config = env == 'production' ? 'prod' : 'dev';
 
 /**
  * Service worker setup with workbox for precaching and runtime caching
@@ -52,7 +53,10 @@ function buildHtml() {
             minifyJS: true,
             minifyCSS: true,
             html5: true,
-            processScripts: ['text/javascript']
+            processScripts: ['text/javascript'],
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            useShortDoctype: true
         }))
         .pipe(gulp.dest('./_site'));
 }
@@ -71,7 +75,7 @@ function buildJson() {
 
 
 function buildYaml(cb) {
-    cp.exec(`./node_modules/.bin/yaml-merge _config/common.yml _config/${env}.yml > _config-${env}.yml`, function(err, stdout, stderr) {
+    cp.exec(`./node_modules/.bin/yaml-merge _config/common.yml _config/${config}.yml > _config-${config}.yml`, function(err, stdout, stderr) {
         if (stdout) console.log(stdout);
         if (stderr) console.log(stderr);
         cb(err);
@@ -95,23 +99,27 @@ function cleanCSS() {
  */
 
 function watchHtml() {
-    gulp.watch(['./*.html', './_includes/*.html', './_layouts/*.html'], gulp.series(buildJekyll, buildHtml));
+    let series = env == 'staging' ? gulp.series(buildJekyll, buildHtml, serviceWorker) : gulp.series(buildJekyll, buildHtml);
+    gulp.watch(['./*.html', './_includes/*.html', './_layouts/*.html'], series);
 }
 
 function watchSass() {
-    gulp.watch('./assets/css/*.{css,scss}', gulp.series(buildJekyll, buildSass));
+    let series = env == 'staging' ? gulp.series(buildJekyll, buildSass, cleanCSS, serviceWorker) : gulp.series(buildJekyll, buildSass);
+    gulp.watch('./assets/css/*.{css,scss}', series);
 }
 
 function watchJson() {
-    gulp.watch('./assets/json/*.json', gulp.series(buildJekyll, buildJson));
+    let series = env == 'staging' ? gulp.series(buildJekyll, buildJson, serviceWorker) : gulp.series(buildJekyll, buildJson);
+    gulp.watch('./assets/json/*.json', series);
 }
 
 function watchYaml() {
-    gulp.watch('./_config/*.yml', gulp.series(buildYaml, buildJekyll));
+    let series = env == 'staging' ? gulp.series(buildYaml, buildJekyll, serviceWorker) : gulp.series(buildYaml, buildJekyll);
+    gulp.watch('./_config/*.yml', series);
 }
 
 function buildJekyll(cb) {
-    cp.exec(`bundle exec jekyll build --config _config-${env}.yml`, function(err, stdout, stderr) {
+    cp.exec(`bundle exec jekyll build --config _config-${config}.yml`, function(err, stdout, stderr) {
         if (stdout) console.log(stdout);
         if (stderr) console.log(stderr);
         cb(err);
@@ -119,7 +127,7 @@ function buildJekyll(cb) {
 }
 
 function serveJekyll(cb) {
-    cp.exec(`bundle exec jekyll serve --skip-initial-build --config _config-${env}.yml`, function(err, stdout, stderr) {
+    cp.exec(`bundle exec jekyll serve --skip-initial-build --config _config-${config}.yml`, function(err, stdout, stderr) {
         if (stdout) console.log(stdout);
         if (stderr) console.log(stderr);
         cb(err);
@@ -127,12 +135,15 @@ function serveJekyll(cb) {
 }
 
 // Build: build yaml, build Jekyll, and build assets together. For prod, additionally purge unused css and set up the service worker.
-exports.build = env == 'prod' ?
+exports.build = (env == 'production' || env == 'staging') ?
     gulp.series(buildYaml, buildJekyll, gulp.parallel(buildHtml, buildSass, buildJson), cleanCSS, serviceWorker) :
     gulp.series(buildYaml, buildJekyll, gulp.parallel(buildHtml, buildSass, buildJson));
 
-// Serve: serve Jekyll, watch assets, and rebuild on changes.
-exports.serve = gulp.parallel(serveJekyll, watchHtml, watchSass, watchJson, watchYaml);
+// Serve: serve Jekyll only
+exports.serve = serveJekyll;
+
+// Watch: serve Jekyll, watch assets, and rebuild on changes
+exports.watch = gulp.parallel(serveJekyll, watchHtml, watchSass, watchJson, watchYaml);
 
 // Build yaml only
 exports.yaml = buildYaml;

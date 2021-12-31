@@ -211,9 +211,3 @@
 .highlight {
   background-color: #f8f8f8;
 }
-
-/* For single backtick code snippets */
-code.language-plaintext.highlighter-rouge {
-    background-color: #f8f8f8;
-    color: #aa0000;
-}

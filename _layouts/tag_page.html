@@ -16,10 +16,10 @@ layout: default
                     <p class="card-text">{{ post.content | strip_html | truncatewords: 20 }}</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">
+                    <small>
                         <span class="pe-1">Tags: </span>
                         {%- for tag in post.tags -%}
-                        <a class="badge tag mt-1 me-1 mb-1" href="{{ site.baseurl | append: 'blog' }}/tags/{{ tag }}">{{ tag }}</a>
+                        <a class="badge tag m-2" href="{{ site.baseurl | append: 'blog' }}/tags/{{ tag }}">{{ tag }}</a>
                         {%- endfor -%}
                     </small>
                 </div>

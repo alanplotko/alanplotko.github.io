@@ -1,0 +1,29 @@
+{%- comment -%}Avoid empty script tag by checking if at least one of the criteria is true{%- endcomment -%}
+{%- if page.url == '/' or jekyll.environment == 'production' or site.serviceWorker -%}
+{%- if page.url == '/' -%}
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js" integrity="sha512-Kef5sc7gfTacR7TZKelcrRs15ipf7+t+n7Zh6mKNJbmW+/RRdCW9nwfLn4YX0s2nO6Kv5Y2ChqgIakaC6PW09A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{%- endif -%}
+{%- if jekyll.environment == 'production' -%}
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/ga-lite/2.1.0/ga-lite.min.js" integrity="sha512-mCxGSkMO0AhSmcgMVoZub1ESJeE8og1EUIeW5y0vltKYqUXTR5gHOM9oe5NtM36Vj4jq/hTmsxD2oPm1y9JGDw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{%- endif -%}
+<script type="text/javascript">
+{%- if jekyll.environment == 'production' -%}
+    var galite = galite || {};
+    galite.UA = '{{ site.google_analytics }}';
+{%- endif -%}
+{%- if site.serviceWorker -%}
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register("{{ site.url }}/sw.js", {
+                scope: "/"
+            });
+        });
+    }
+{%- endif -%}
+{%- if page.url == '/' -%}
+    window.addEventListener('DOMContentLoaded', (event) => {
+        particlesJS.load("particles", "assets/json/particlesjs-config.json");
+    });
+{%- endif -%}
+</script>
+{%- endif -%}

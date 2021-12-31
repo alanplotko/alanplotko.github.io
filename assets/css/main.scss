@@ -1,22 +1,18 @@
 @import "assets/css/skeleton";
 
-/* Custom CSS
+/* Page defaults
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-/* Larger than phablet (also point when grid becomes active) */
-
-@media (min-width: 550px) {
-    .container h1 {
-        font-size: 6rem;
-    }
-}
-
-body {
+html {
     background-color: #222;
+    color: #fff;
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     font-weight: 300;
-    color: #fff;
+
 }
+
+/* Particle Canvas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 #particles {
     position: fixed;
@@ -27,8 +23,10 @@ body {
     z-index: -1;
 }
 
+/* Main Content
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-/* Main content */
+// Center on page
 
 .container .main {
     position: fixed;
@@ -39,25 +37,37 @@ body {
     transform: translate(-50%, -50%);
 }
 
+// Headers
 
-/* Headers */
+@media (min-width: 550px) {
+    .container h1 {
+        font-size: 6rem;
+    }
+}
 
 .container h1 {
     margin-bottom: 0;
     font-weight: 500;
 }
 
-
-/* Link icons */
+// Link icons
 
 .container svg {
     margin: 0 8px;
     width: 4.8rem;
     height: 4.8rem;
     stroke-width: 0;
+    color: #fff;
     stroke: #fff;
     fill: #fff;
 }
+
+.container a {
+    text-decoration: none;
+    color: #fff;
+}
+
+// Contact
 
 #contact {
     visibility: hidden;
@@ -68,7 +78,7 @@ body {
     font-size: 1.5rem;
 }
 
-pre#contact>code {
+pre#contact > code {
     padding: 1rem 5rem;
 }
 

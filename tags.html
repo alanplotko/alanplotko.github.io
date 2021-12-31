@@ -5,12 +5,12 @@ permalink: /blog/tags/
 ---
 
 <div>
-    <ul>
+    <ol class="tags-list d-inline-block list-group list-group-flush list-group-numbered">
         {%- for tag in site.tags -%}
-        <li>
+        <li class="list-group-item">
             <a href="{{ site.baseurl | append: 'blog' }}/tags/{{ tag[0] }}">{{ tag[0] }}</a>
             <small class="text-muted">({{ tag[1].size }} post{%- if tag[1].size > 1 -%}s{%- endif -%})</small>
         </li>
         {%- endfor -%}
-    </ul>
+    </ol>
 </div>
