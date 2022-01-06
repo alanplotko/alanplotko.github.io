@@ -7,17 +7,26 @@ layout: default
         {%- include breadcrumbs.html title=page.title -%}
         <div class="post pt-2">
             {%- include post_header.html reading_content=content post=page anchor=true -%}
-            {{ content | inject_anchors }}
+            {% include anchor_headings.html html=content anchorAttrs='aria-hidden="true" tabindex="-1"' %}
         </div>
-        <hr />
-        {%- include section_tags.html tags=page.tags moduloEnabled=false title='Post Tags' -%}
-        <div class="pt-5"></div>
+        {%- include clap.html -%}
+        <hr class="mt-5 mb-5" />
+        <h2 id="further-reading">Further Reading</h2>
         {%- include section_recent_posts.html -%}
+        <div class="pt-3"></div>
+        <h2>Post Tags</h2>
+        {%- include section_tags.html tags=page.tags moduloEnabled=false -%}
+        <div class="pt-3"></div>
+        {%- include section_comments.html -%}
     </div>
     <div id="side-content" class="col gy-5">
-        <div class="section-toc sticky-top">
-            <p class="fw-bold mb-1">Contents <small>(<a class="fw-normal" href="#post-title">Back to Top</a>)</small></p>
-            {% toc %}
+        <div class="section-toc">
+            <p class="d-block border-bottom mb-1 pb-1 fw-bold text-muted">On this page</p>
+            {% include toc.html html=content id='toc' item_class='toc-h%level%' submenu_class='toc-sublist' anchor_class='text-muted' %}
+            <ul>
+                <li><a class="fw-bold text-muted toc-menu-option" href="#further-reading">Further Reading</a></li>
+                <li><a class="fw-bold text-muted toc-menu-option" href="#post-title">Back to Top</a></li>
+            </ul>
         </div>
     </div>
 </div>
