@@ -2,3 +2,6 @@ url: http://localhost:4000
 author:
   url: http://localhost:4000
 serviceWorker: false
+clapAPI: http://localhost:8787
+staticman:
+  endpoint: http://localhost:4000/example
