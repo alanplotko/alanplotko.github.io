@@ -7,8 +7,6 @@
 {%- endif -%}
 
 {%- if recentPosts.size > 0 -%}
-<h2>{{ include.title | default: 'Recent Posts' }}</h2>
-
 <ul class="recent-posts d-inline-block pb-3 list-group list-group-numbered list-group-flush">
     {%- for post in recentPosts -%}
     <li class="list-group-item">

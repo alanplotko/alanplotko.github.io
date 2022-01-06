@@ -6,17 +6,16 @@
     {%- assign tags=site.tags -%}
 {%- endif -%}
 
-<h2>{{ include.title | default: 'Tags' }}</h2>
 <div class="tags">
     {%- for tag in tags -%}
     {%- if isGlobal -%}
         {%- capture tagName -%}{{ tag[0] }}{%- endcapture -%}
-        {%- capture label -%}{{ tag[0] }} | {{ tag[1].size }}{%- endcapture -%}
+        {%- capture label -%}{{ tag[0] }}{%- endcapture -%}
     {%- else -%}
         {%- capture tagName -%}{{ tag }}{%- endcapture -%}
         {%- capture label -%}{{ tag }}{%- endcapture -%}
     {%- endif -%}
-    <a class="badge tag mt-2 me-2 mb-2" href="{{ site.baseurl | append: 'blog' }}/tags/{{ tagName }}">{{ label }}</a>
+    <a href="{{ site.baseurl | append: 'blog' }}/tags/{{ tagName }}" class="tag-dark mt-2 me-2 mb-2">{{ label }}</a>
     {%- if include.moduloEnabled -%}
         {%- assign separatorCount = include.separatorCount | default: 3 -%}
         {%- assign mod = forloop.index | modulo: separatorCount -%}
