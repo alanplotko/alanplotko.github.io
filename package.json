@@ -37,6 +37,7 @@
         "gulp-jsonmin": "^1.2.0",
         "gulp-purgecss": "^4.1.3",
         "gulp-sass": "^5.0.0",
+        "gulp-uglify": "^3.0.2",
         "lighthouse": "^9.2.0",
         "path": "^0.12.7",
         "sass": "^1.45.1",
@@ -46,5 +47,8 @@
     },
     "resolutions": {
         "glob-parent": "^5.1.2"
+    },
+    "dependencies": {
+        "applause-button": "^3.4.0"
     }
 }

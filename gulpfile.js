@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const htmlmin = require('gulp-htmlmin');
 const jsonmin = require('gulp-jsonmin');
 const sass = require('gulp-sass')(require('sass'));
+const uglify = require('gulp-uglify');
 const purgecss = require('gulp-purgecss');
 const cp = require('child_process');
 const workboxBuild = require('workbox-build');
@@ -67,6 +68,12 @@ function buildSass() {
         .pipe(gulp.dest('./_site/assets/css'));
 }
 
+function buildJs() {
+    return gulp.src('./node_modules/applause-button/dist/applause-button.js')
+        .pipe(uglify())
+        .pipe(gulp.dest('./_site/assets/js'));
+}
+
 function buildJson() {
     return gulp.src('./_site/**/*.json')
         .pipe(jsonmin())
@@ -108,6 +115,11 @@ function watchSass() {
     gulp.watch('./assets/css/*.{css,scss}', series);
 }
 
+function watchJs() {
+    let series = env == 'staging' ? gulp.series(buildJekyll, buildJs, serviceWorker) : gulp.series(buildJekyll, buildJs);
+    gulp.watch('./assets/js/*.js', series);
+}
+
 function watchJson() {
     let series = env == 'staging' ? gulp.series(buildJekyll, buildJson, serviceWorker) : gulp.series(buildJekyll, buildJson);
     gulp.watch('./assets/json/*.json', series);
@@ -136,14 +148,14 @@ function serveJekyll(cb) {
 
 // Build: build yaml, build Jekyll, and build assets together. For prod, additionally purge unused css and set up the service worker.
 exports.build = (env == 'production' || env == 'staging') ?
-    gulp.series(buildYaml, buildJekyll, gulp.parallel(buildHtml, buildSass, buildJson), cleanCSS, serviceWorker) :
-    gulp.series(buildYaml, buildJekyll, gulp.parallel(buildHtml, buildSass, buildJson));
+    gulp.series(buildYaml, buildJekyll, gulp.parallel(buildHtml, buildSass, buildJs, buildJson), cleanCSS, serviceWorker) :
+    gulp.series(buildYaml, buildJekyll, gulp.parallel(buildHtml, buildSass, buildJs, buildJson));
 
 // Serve: serve Jekyll only
 exports.serve = serveJekyll;
 
 // Watch: serve Jekyll, watch assets, and rebuild on changes
-exports.watch = gulp.parallel(serveJekyll, watchHtml, watchSass, watchJson, watchYaml);
+exports.watch = gulp.parallel(serveJekyll, watchHtml, watchSass, watchJs, watchJson, watchYaml);
 
 // Build yaml only
 exports.yaml = buildYaml;
