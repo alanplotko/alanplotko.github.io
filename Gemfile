@@ -12,5 +12,3 @@ gem "jekyll-paginate-v2", "~> 3.0"
 
 
 gem "jekyll-tagging", "~> 1.1"
-
-gem "jekyll-toc", "~> 0.17.1"

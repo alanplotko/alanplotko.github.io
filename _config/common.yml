@@ -1,29 +1,18 @@
 # Build
 exclude: ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/", "gulpfile.js", "reports/", "package.json", "yarn.lock", "README.md", "assets/css/", "tests/"]
 include: [".nojekyll"]
-keep_files: [".git", "assets/css"]
+keep_files: [".git", "assets/css", "assets/js"]
 
 # Plugins
 plugins:
   - jekyll-paginate-v2
   - jekyll-sitemap
   - jekyll/tagging
-  - jekyll-toc
 
 # Custom settings
 serviceWorker: true
+clapAPI: https://apblog.workers.dev
 
-# Table of Contents
-toc:
-  min_level: 1
-  max_level: 6
-  ordered_list: false
-  no_toc_section_class: no_toc_section
-  list_id: toc
-  list_class: 'd-inline-block list-group list-group-flush list-group-numbered'
-  sublist_class: 'list-group list-group-flush list-group-numbered'
-  item_class: 'list-group-item'
-  item_prefix: list-group-item-
 
 # Tagging
 tag_page_layout: tag_page
