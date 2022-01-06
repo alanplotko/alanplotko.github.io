@@ -1,0 +1,10 @@
+introducing-hyde:
+  - message: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt s
+    name: First Last
+    email: email@example.com
+    date: '2022-01-01T10:00:00.000Z'
+  - message: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id aliquet risus feugiat in ante metus dictum at tempor. Viverra nam libero justo laoreet sit amet cursus sit. Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Diam sollicitudin tempor id eu. Enim sed faucibus turpis in eu mi bibendum neque egestas. Faucibus vitae aliquet nec ullamcorper sit amet. Sollicitudin nibh sit amet commodo nulla facilisi nullam. Donec enim diam vulputate ut pharetra sit amet aliquam. Tincidunt id aliquet risus feugiat in ante metus.
+    name: First Last
+    email: email@example.com
+    date: '2022-01-01T10:30:00.000Z'
+
