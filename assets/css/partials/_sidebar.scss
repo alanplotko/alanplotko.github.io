@@ -1,0 +1,54 @@
+/* Sidebar
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+#sidebar {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $secondary;
+    text-align: left;
+    padding: 2.5rem 2rem;
+    color: rgba(255, 255, 255, 0.5);
+    width: 360px;
+}
+
+#sidebar a {
+    color: #fff;
+}
+
+// Logo at 100px
+#sidebar .sidebar-logo {
+    width: 100px;
+    height: 100px;
+}
+
+#sidebar .sidebar-about h1 {
+    font-size: 2.5rem;
+}
+
+@include media-breakpoint-down(lg) {
+    #sidebar {
+        width: 288px;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    #sidebar {
+        position: unset;
+        text-align: center;
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    // Center logo when sidebar collapses in responsive mobile view
+    .sidebar-logo {
+        margin: 0 auto 1rem auto;
+    }
+
+    // Center logo when sidebar collapses in responsive mobile view
+    .sidebar-logo {
+        margin: 0 auto 1rem auto;
+    }
+}

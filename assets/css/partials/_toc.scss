@@ -1,0 +1,39 @@
+/* Table of Contents
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+$toc-link-font-size: 16px;
+
+.section-toc {
+    position: sticky;
+    top: 0;
+    max-width: fit-content;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+a.toc-menu-option {
+    font-size: $toc-link-font-size;
+}
+
+.section-toc ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+
+    a {
+        font-size: $toc-link-font-size;
+    }
+
+    li.toc-h2 > a {
+        font-weight: 700;
+    }
+
+    ul.toc-sublist {
+        padding-left: 16px;
+        margin-bottom: 0;
+    }
+
+    ul.toc-sublist ul {
+        padding-left: 0;
+    }
+}

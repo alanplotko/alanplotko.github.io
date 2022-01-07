@@ -11,7 +11,7 @@ plugins:
 
 # Custom settings
 serviceWorker: true
-clapAPI: https://apblog.workers.dev
+clapAPI: https://claps.apblog.workers.dev
 
 
 # Tagging

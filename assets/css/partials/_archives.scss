@@ -1,0 +1,149 @@
+/* Archive Styles (base from Chirpy theme)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+%date-timeline {
+    content: "";
+    width: 4px;
+    left: 75px;
+    display: block;
+    float: left;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.archives .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.archives {
+    letter-spacing: 0.48px;
+
+    span.lead {
+        font-size: 24px;
+        position: relative;
+        left: 8px;
+
+        &::after {
+            content: "";
+            display: block;
+            position: relative;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            top: -26px;
+            left: 63px;
+            border: 3px solid;
+            background-color: #fff;
+            border-color: #c2c6cc;
+            box-shadow: 0 0 2px 0 #c2c6cc;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        &:not(:first-child) {
+            position: relative;
+            left: 4px;
+
+            &::after {
+                left: 67px;
+            }
+        }
+    }
+
+    ul {
+        li {
+            font-size: 17.6px;
+            line-height: 48px;
+
+            div {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                a {
+                    margin-left: 40px;
+                    position: relative;
+                    top: 1.6px;
+                }
+            }
+
+            &:nth-child(odd) {
+                background-color: #fff;
+                background-image: linear-gradient(to left, #fff, #fbfbfb, #fbfbfb, #fbfbfb, #fff);
+            }
+
+            &::after {
+                @extend %date-timeline;
+
+                height: 44.8px;
+                top: -20.8px;
+            }
+
+            &:first-child::before {
+                @extend %date-timeline;
+
+                height: 48.96px;
+                top: -25.76px;
+            }
+        }
+
+        &:not(:last-child) > li:last-child::after {
+            height: 54.4px;
+        }
+
+        &:last-child > li:last-child::after {
+            display: none;
+        }
+    }
+
+    .date {
+        white-space: nowrap;
+        display: inline-block;
+
+        &.month {
+            width: 22.4px;
+            text-align: center;
+            font-size: 80%;
+
+            ~ a::before {
+                content: "";
+                display: block;
+                float: left;
+                position: relative;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                border-radius: 50%;
+                width: 8px;
+                height: 8px;
+                top: 21.6px;
+                left: 69px;
+                background-color: #c2c6cc;
+                box-shadow: 0 0 3px 0 #c2c6cc;
+                z-index: 1;
+            }
+        }
+
+        &.day {
+            font-size: 85%;
+            color: #212529;
+            text-align: center;
+            margin-right: -2px;
+            width: 19.2px;
+            position: relative;
+            left: -2.4px;
+        }
+    }
+}
+
+@media all and (max-width: 576px) {
+    .archives {
+        margin-top: -16px;
+
+        ul {
+            letter-spacing: 0;
+        }
+    }
+}

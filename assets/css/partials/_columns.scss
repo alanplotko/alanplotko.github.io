@@ -1,0 +1,39 @@
+/* Content: Outer Column
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+#main {
+    padding: 80px 100px 80px 460px;
+}
+
+@include media-breakpoint-down(xl) {
+    #main {
+        padding: 80px 60px 80px 420px;
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    #main {
+        padding: 64px 48px 64px 336px;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    #main {
+        padding: 80px 20px;
+    }
+}
+
+/* Content: First Inner Column
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+#post-content {
+    max-width: 720px;
+}
+
+/* Content: Second Inner Column
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+#side-content {
+    min-width: fit-content;
+    white-space: nowrap;
+}

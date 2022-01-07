@@ -112,7 +112,7 @@ function watchHtml() {
 
 function watchSass() {
     let series = env == 'staging' ? gulp.series(buildJekyll, buildSass, cleanCSS, serviceWorker) : gulp.series(buildJekyll, buildSass);
-    gulp.watch('./assets/css/*.{css,scss}', series);
+    gulp.watch('./assets/css/**/*.{css,scss}', series);
 }
 
 function watchJs() {

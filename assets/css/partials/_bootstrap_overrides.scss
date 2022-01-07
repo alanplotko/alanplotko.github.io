@@ -1,0 +1,24 @@
+/* Bootstrap overrides
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+// Inherit font color from body
+.list-group-item {
+    color: inherit;
+}
+
+// Add bottom border to list groups for main post listing on blog page, recent posts section, and tag directory page
+.posts.list-group-flush > .list-group-item:last-child,
+.recent-posts.list-group-flush > .list-group-item:last-child,
+.tags-list.list-group-flush > .list-group-item:last-child {
+    border-width: 0 0 1px;
+}
+
+// Set all links to primary bootstrap color
+a {
+    color: $primary;
+}
+
+// Improve contrast ratio for blockquotes
+blockquote {
+    color: #757575;
+}

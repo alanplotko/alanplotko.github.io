@@ -1,0 +1,28 @@
+/* Comment form
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+textarea {
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+}
+
+.card .card-body .message {
+    padding-left: 80px;
+
+    &::after {
+        clear: both;
+    }
+}
+
+.card .card-body .actions {
+    margin-top: 5px;
+}
+
+img.comment__avatar {
+    border-bottom-left-radius: 0;
+}
+
+@include media-breakpoint-down(md) {
+    p.comment__content {
+        font-size: 16px;
+    }
+}
