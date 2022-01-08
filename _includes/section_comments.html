@@ -1,11 +1,12 @@
 {% if site.staticman.endpoint %}
+
 <div class="staticman-comments">
     <div class="page__comments">
         <!-- Start static comments -->
         <div class="js-comments">
-        {% if site.data.comments[page.slug] %}
+        {% if site.data.comments.comments[page.slug] %}
             <h2 class="page__comments-title">Comments</h2>
-            {% assign comments = site.data.comments[page.slug] %}
+            {% assign comments = site.data.comments.comments[page.slug] %}
             {% for comment in comments %}
             {% assign email = comment.email %}
             {% assign name = comment.name %}
