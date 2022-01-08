@@ -22,10 +22,6 @@ tag_page_data:
   sitemap: false
 
 defaults:
-  - scope:
-      path: ""
-    values:
-      toc: true
   -
     scope:
       path:            'assets/**'

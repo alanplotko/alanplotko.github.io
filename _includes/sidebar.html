@@ -21,6 +21,10 @@
         href="{{ node.url }}">{{ node.title }}</a>
     {%- endif -%}
     {%- endfor -%}
+    <!-- <button id="darkmode-button" class="btn btn-secondary btn-sm ms-3 mt-3" onclick="darkmode.toggleDarkMode();return false;">
+        <svg class="d-light-inline" title="Switch to dark mode"><use xlink:href="/assets/svg/symbol-defs.svg#icon-moon-o"></use></svg>
+        <svg class="d-dark-inline" title="Switch to light mode"><use xlink:href="/assets/svg/symbol-defs.svg#icon-sun-o"></use></svg>
+    </button> -->
 </nav>
 
 <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>

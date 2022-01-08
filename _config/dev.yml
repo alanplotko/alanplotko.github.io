@@ -4,4 +4,4 @@ author:
 serviceWorker: false
 clapAPI: http://localhost:8787
 staticman:
-  endpoint: http://localhost:4000/example
+  endpoint: http://localhost:8500/v3/entry/github/alanplotko/alanplotko.github.io/develop-blog/comments

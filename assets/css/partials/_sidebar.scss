@@ -18,6 +18,19 @@
     color: #fff;
 }
 
+#darkmode-button {
+    width: 96px;
+
+    svg {
+        width: 36px;
+        height: 36px;
+        stroke-width: 0;
+        color: #fff;
+        stroke: #fff;
+        fill: #fff;
+    }
+}
+
 // Logo at 100px
 #sidebar .sidebar-logo {
     width: 100px;
