@@ -1,19 +1,56 @@
-<div id="comment{{ include.index }}" class="card mb-4 js-comment comment ms-0">
-    <div class="card-header p-0 comment__avatar-wrapper d-flex flex-row justify-content-start align-items-start">
-        <img class="comment__avatar pe-3 m-0" src="https://www.gravatar.com/avatar/{{ include.email }}?d=mm&s=80" alt="{{ include.name }}">
-        <div class="d-flex flex-column">
-            <h3 class="card-title comment__author mt-2 mb-0">{{ include.name }}</h3>
-            <p class="card-text comment__date text-muted mb-0">
-                <small>
-                    {% if include.date %}
-                    {{ include.date | date: "%B %d, %Y at %I:%M %p" }}
-                    {% endif %} | 
-                    {% if include.index %}<a class="comment__permalink" href="#comment{{ include.index }}">Permalink</a>{% endif %}
-                </small>
-            </p>
+{%- capture article_class %}js-comment comment{% if include.name == site.author.name %} admin{% endif %}{% if
+include.is_reply %} child{% endif %}{% endcapture %}
+{% assign comment_id = include.uid | prepend: 'comment-' %}
+<article id="{{ comment_id }}" class="{{ article_class }}" uid="{{ include.uid }}">
+    <div class="d-flex flex-row">
+        <div>
+            <img class="comment__avatar rounded me-3 m-0"
+                src="https://www.gravatar.com/avatar/{{ include.email }}?d=identicon&s=64" alt="{{ include.name }}">
+        </div>
+
+        <div class="flex-column">
+            <div class="comment__author fw-bold text-black">
+                {% if include.name == site.author.name %}
+                <span class="comment__admin_tag">Author</span>
+                {% endif %}
+                {{- include.name | strip_html }}
+            </div>
+
+            <small class="comment__date fw-normal">
+                {%- if include.date -%}
+                {{ include.date | date:"%b %d, %Y" }} &bull; <a href="#{{ comment_id }}"
+                    title="Permalink to this comment">Permalink</a>
+                {%- endif -%}
+            </small>
         </div>
     </div>
-    <div class="card-block p-3 comment__content-wrapper">
-        <p class="card-text comment__content">{{ include.message }}</p>
+
+    <div class="comment__body pt-3">
+        {{ include.message | strip_html | markdownify }}
     </div>
+
+    {% if include.is_reply %}
+</article>
+{% else %}
+<div class="comment__meta">
+    <a rel="nofollow" class="comment__reply-link"
+        onclick="return addComment.moveForm('{{ comment_id }}', '{{ include.uid }}', 'respond', '{{ page.slug }}', '{{ include.name }}');">&#8618;
+        Reply to {{ include.name }}
+    </a>
 </div>
+</article>
+
+{%- capture this_uid %}{{ include.uid }}{% endcapture %}
+{%- assign replies = site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to_uid == this_uid' %}
+{%- assign replies_date = replies | sort: 'date' %}
+{% for reply in replies_date %}
+{%- assign email = reply.email -%}
+{%- assign name = reply.name -%}
+{%- assign date = reply.date -%}
+{%- assign message = reply.message -%}
+{%- assign uid = reply._id -%}
+{% include comment.html is_reply=true uid=uid email=email name=name date=date message=message %}
+{% endfor %}
+
+<hr style="border-top: 1px solid #ccc; background: transparent; margin-bottom: 10px;">
+{% endif %}
