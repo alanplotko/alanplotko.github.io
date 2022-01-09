@@ -52,5 +52,5 @@ include.is_reply %} child{% endif %}{% endcapture %}
 {% include comment.html is_reply=true uid=uid email=email name=name date=date message=message %}
 {% endfor %}
 
-<hr style="border-top: 1px solid #ccc; background: transparent; margin-bottom: 10px;">
+<hr class="comment__break" />
 {% endif %}

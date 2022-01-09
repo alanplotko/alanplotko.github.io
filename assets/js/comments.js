@@ -3,12 +3,14 @@
 
 document.getElementById('comment-form').addEventListener('submit', function (e) {
     e.preventDefault();
-    let formData = JSON.stringify(Object.fromEntries(new FormData(e.target)));
+    const formData = new URLSearchParams(new FormData(e.target));
     document.querySelectorAll('#comment-form .js-notice').forEach(node => node.classList.add('d-none'));
-    let submitBtn = document.getElementById('comment-form-submit');
+    const submitBtn = document.getElementById('comment-form-submit');
+    const cancelReplyBtn = document.getElementById('cancel-comment-reply-link');
     submitBtn.blur()
-    let fields = document.querySelectorAll('#comment-form input[required], #comment-form textarea[required]');
+    const fields = document.querySelectorAll('#comment-form input[required], #comment-form textarea[required]');
     submitBtn.classList.add('disabled');
+    cancelReplyBtn.classList.add('disabled');
     fields.forEach(node => setAttributes(node, {
         'disabled': '',
         'aria-disabled': 'disabled',
@@ -20,7 +22,7 @@ document.getElementById('comment-form').addEventListener('submit', function (e) 
         cache: 'no-cache',
         body: formData,
         referrerPolicy: 'no-referrer',
-        headers: new Headers({ 'Content-Type': 'application/json' })
+        headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' })
     }).then(() => {
         submitBtn.innerHTML = 'Submitted';
         document.querySelector('#comment-form .js-notice.alert-success').classList.remove('d-none');
@@ -29,6 +31,7 @@ document.getElementById('comment-form').addEventListener('submit', function (e) 
         submitBtn.innerHTML = 'Submit Comment';
         document.querySelector('#comment-form .js-notice.alert-danger').classList.remove('d-none');
         submitBtn.classList.remove('disabled');
+        cancelReplyBtn.classList.remove('disabled');
         fields.forEach(node => removeAttributes(node, ['disabled', 'aria-disabled', 'tabindex']));
     });
 
