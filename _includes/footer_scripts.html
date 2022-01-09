@@ -11,8 +11,12 @@
 {%- endif -%}
 {%- if jekyll.environment == 'production' -%}
 <script type="text/javascript">
-    var galite = galite || {};
-    galite.UA = '{{ site.google_analytics }}';
+    galite('create', '{{ site.google_analytics }}', 'auto');
+    galite('set', 'anonymizeIp', true);
+    galite('send', 'pageview');
+    window.addEventListener('unload', () => {
+        galite('send', 'timing', 'JS Dependencies', 'unload');
+    });
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register("{{ site.url }}/sw.js", {
