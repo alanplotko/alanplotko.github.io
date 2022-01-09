@@ -69,7 +69,7 @@ function buildSass() {
 }
 
 function buildJs() {
-    return gulp.src(['./assets/js/*.js', './node_modules/applause-button/dist/applause-button.js'])
+    return gulp.src('./assets/js/*.js') /* , './node_modules/applause-button/dist/applause-button.js'])*/
         .pipe(uglify())
         .pipe(gulp.dest('./_site/assets/js'));
 }

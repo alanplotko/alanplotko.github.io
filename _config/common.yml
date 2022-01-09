@@ -11,8 +11,9 @@ plugins:
 
 # Custom settings
 serviceWorker: true
-clapAPI: https://claps.apblog.workers.dev
-
+api:
+  worker: https://worker.alanplotko.com
+  staticman: https://comments.alanplotko.com/v3/entry/github/alanplotko/alanplotko.github.io/master/comments
 
 # Tagging
 tag_page_layout: tag_page

@@ -2,7 +2,7 @@
 <p class="instruct text-muted"><small><a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a> is allowed. Email
     address will be hashed and used for <a href="https://en.gravatar.com/">Gravatar</a>.</small></p>
 <form id="comment-form" class="row g-3 page__form js-form form" method="POST"
-    action="{{ site.staticman.endpoint }}">
+    action="{{ site.api.staticman }}">
 
     <!-- Start comment form alert messaging -->
     <div class="col-12 d-none js-notice alert alert-success mb-0" role="alert">
@@ -43,15 +43,15 @@
         <input type="hidden" id="comment-post-id" name="options[slug]" value="{{ page.slug }}">
         <label for="comment-form-location">Leave blank if you are a human</label>
         <input type="text" id="comment-form-location" name="fields[hidden]" autocomplete="off" />
-        {% if site.staticman.reCaptcha.siteKey %}<input type="hidden" name="options[reCaptcha][siteKey]"
-            value="{{ site.staticman.reCaptcha.siteKey }}">{% endif %}
-        {% if site.staticman.reCaptcha.secret %}<input type="hidden" name="options[reCaptcha][secret]"
-            value="{{ site.staticman.reCaptcha.secret }}">{% endif %}
+        {% if site.api.staticman.reCaptcha.siteKey %}<input type="hidden" name="options[reCaptcha][siteKey]"
+            value="{{ site.api.staticman.reCaptcha.siteKey }}">{% endif %}
+        {% if site.api.staticman.reCaptcha.secret %}<input type="hidden" name="options[reCaptcha][secret]"
+            value="{{ site.api.staticman.reCaptcha.secret }}">{% endif %}
     </div>
 
-    {% if site.staticman.reCaptcha.siteKey %}
+    {% if site.api.staticman.reCaptcha.siteKey %}
     <div class="form-group">
-        <div class="g-recaptcha" data-sitekey="{{ site.staticman.reCaptcha.siteKey }}"></div>
+        <div class="g-recaptcha" data-sitekey="{{ site.api.staticman.reCaptcha.siteKey }}"></div>
     </div>
     {% endif %}
     <div class="form-group">
