@@ -4,6 +4,7 @@ const jsonmin = require('gulp-jsonmin');
 const sass = require('gulp-sass')(require('sass'));
 const uglify = require('gulp-uglify');
 const purgecss = require('gulp-purgecss');
+const mergeStream = require('merge-stream');
 const cp = require('child_process');
 const workboxBuild = require('workbox-build');
 
@@ -25,17 +26,17 @@ function serviceWorker() {
         ],
         swDest: '_site/sw.js',
         runtimeCaching: [{
-                urlPattern: /^https?:\/\/cdnjs.cloudflare.com/,
-                handler: 'StaleWhileRevalidate',
-            },
-            {
-                urlPattern: /^https?:\/\/fonts.googleapis.com/,
-                handler: 'StaleWhileRevalidate',
-            },
-            {
-                urlPattern: /^https?:\/\/fonts.gstatic.com/,
-                handler: 'StaleWhileRevalidate',
-            }
+            urlPattern: /^https?:\/\/cdnjs.cloudflare.com/,
+            handler: 'StaleWhileRevalidate',
+        },
+        {
+            urlPattern: /^https?:\/\/fonts.googleapis.com/,
+            handler: 'StaleWhileRevalidate',
+        },
+        {
+            urlPattern: /^https?:\/\/fonts.gstatic.com/,
+            handler: 'StaleWhileRevalidate',
+        }
         ]
     });
 }
@@ -63,15 +64,25 @@ function buildHtml() {
 }
 
 function buildSass() {
-    return gulp.src('./assets/css/*.scss')
+    const mainStyles = gulp.src('./assets/css/main.scss')
         .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
-        .pipe(gulp.dest('./_site/assets/css'));
+        .pipe(purgecss({
+            content: ['./_site/index.html']
+        }))
+        .pipe(gulp.dest('./_site/assets/css', { overwrite: true }));
+    const blogStyles = gulp.src('./assets/css/theme.scss')
+        .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(purgecss({
+            content: ['./_site/**/*.html', '!./_site/index.html']
+        }))
+        .pipe(gulp.dest('./_site/assets/css', { overwrite: true }));
+    return mergeStream(mainStyles, blogStyles);
 }
 
 function buildJs() {
     return gulp.src('./assets/js/*.js') /* , './node_modules/applause-button/dist/applause-button.js'])*/
         .pipe(uglify())
-        .pipe(gulp.dest('./_site/assets/js'));
+        .pipe(gulp.dest('./_site/assets/js', { overwrite: true }));
 }
 
 function buildJson() {
@@ -80,25 +91,12 @@ function buildJson() {
         .pipe(gulp.dest('./_site'));
 }
 
-
 function buildYaml(cb) {
-    cp.exec(`./node_modules/.bin/yaml-merge _config/common.yml _config/${config}.yml > _config-${config}.yml`, function(err, stdout, stderr) {
+    cp.exec(`./node_modules/.bin/yaml-merge _config/common.yml _config/${config}.yml > _config-${config}.yml`, function (err, stdout, stderr) {
         if (stdout) console.log(stdout);
         if (stderr) console.log(stderr);
         cb(err);
     });
-}
-
-/**
- * Purge unused CSS to minimize resource size in production
- */
-
-function cleanCSS() {
-    return gulp.src('./_site/**/*.css')
-        .pipe(purgecss({
-            content: ['./_site/**/*.html']
-        }))
-        .pipe(gulp.dest('./_site'));
 }
 
 /**
@@ -111,7 +109,7 @@ function watchHtml() {
 }
 
 function watchSass() {
-    let series = env == 'staging' ? gulp.series(buildJekyll, buildSass, cleanCSS, serviceWorker) : gulp.series(buildJekyll, buildSass);
+    let series = env == 'staging' ? gulp.series(buildJekyll, buildSass, serviceWorker) : gulp.series(buildJekyll, buildSass);
     gulp.watch('./assets/css/**/*.{css,scss}', series);
 }
 
@@ -131,7 +129,7 @@ function watchYaml() {
 }
 
 function buildJekyll(cb) {
-    cp.exec(`bundle exec jekyll build --config _config-${config}.yml`, function(err, stdout, stderr) {
+    cp.exec(`bundle exec jekyll build --config _config-${config}.yml`, function (err, stdout, stderr) {
         if (stdout) console.log(stdout);
         if (stderr) console.log(stderr);
         cb(err);
@@ -139,7 +137,7 @@ function buildJekyll(cb) {
 }
 
 function serveJekyll(cb) {
-    cp.exec(`bundle exec jekyll serve --skip-initial-build --config _config-${config}.yml`, function(err, stdout, stderr) {
+    cp.exec(`bundle exec jekyll serve --skip-initial-build --config _config-${config}.yml`, function (err, stdout, stderr) {
         if (stdout) console.log(stdout);
         if (stderr) console.log(stderr);
         cb(err);
@@ -148,7 +146,7 @@ function serveJekyll(cb) {
 
 // Build: build yaml, build Jekyll, and build assets together. For prod, additionally purge unused css and set up the service worker.
 exports.build = (env == 'production' || env == 'staging') ?
-    gulp.series(buildYaml, buildJekyll, gulp.parallel(buildHtml, buildSass, buildJs, buildJson), cleanCSS, serviceWorker) :
+    gulp.series(buildYaml, buildJekyll, gulp.parallel(buildHtml, buildSass, buildJs, buildJson), serviceWorker) :
     gulp.series(buildYaml, buildJekyll, gulp.parallel(buildHtml, buildSass, buildJs, buildJson));
 
 // Serve: serve Jekyll only

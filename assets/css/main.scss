@@ -3,12 +3,11 @@
 /* Page defaults
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-html {
+body {
     background-color: #222;
     color: #fff;
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     font-weight: 300;
-
 }
 
 /* Particle Canvas
@@ -28,7 +27,7 @@ html {
 
 // Center on page
 
-.container .main {
+.main {
     position: fixed;
     text-align: center;
     top: 50%;
@@ -40,19 +39,19 @@ html {
 // Headers
 
 @media (min-width: 550px) {
-    .container h1 {
+    .main h1 {
         font-size: 6rem;
     }
 }
 
-.container h1 {
+.main h1 {
     margin-bottom: 0;
     font-weight: 500;
 }
 
 // Link icons
 
-.container svg {
+.main svg {
     margin: 0 8px;
     width: 4.8rem;
     height: 4.8rem;
@@ -62,7 +61,7 @@ html {
     fill: #fff;
 }
 
-.container a {
+.main a {
     text-decoration: none;
     color: #fff;
 }
