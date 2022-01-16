@@ -1,3 +1,9 @@
-<div class="d-flex justify-content-center">
-    <applause-button id="applause-button" class="applause-button" url="{{ page.slug }}" multiclap="true" color="green" api="{{ site.api.worker }}" />
+<div class="applause-container" url="{{ page.slug }}" api="{{ site.api.worker }}">
+    <button type="button" class="btn btn-secondary applause-button d-flex align-items-center">
+        <svg class="applause-icon"><use xlink:href="/assets/svg/symbol-defs.svg#icon-clap"></use></svg>
+        <span class="applause-count-spinner spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+        <span class="applause-count ps-2 d-none"></span>
+        <span class="applause-buffer-count ps-2 d-none"></span>
+    </button>
+    <small class="text-muted"><span class="fw-bold applause-multiclap-countdown"></span>Clap multiple times by clicking again or holding.</small>
 </div>

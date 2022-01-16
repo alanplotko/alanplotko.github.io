@@ -1,9 +1,9 @@
 /* Clap button
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-@import "node_modules/applause-button/dist/applause-button";
-
-.applause-button {
-    width: 100px;
-    height: 100px;
+.applause-button svg {
+    fill: #fff;
+    width: 36px;
+    height: 36px;
+    stroke: none;
 }

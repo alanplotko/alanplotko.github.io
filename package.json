@@ -49,7 +49,5 @@
     "resolutions": {
         "glob-parent": "^5.1.2"
     },
-    "dependencies": {
-        "applause-button": "^3.4.0"
-    }
+    "dependencies": {}
 }

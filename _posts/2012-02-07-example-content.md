@@ -89,9 +89,9 @@ Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo r
 
 Quisque consequat sapien eget quam rhoncus, sit amet laoreet diam tempus. Aliquam aliquam metus erat, a pulvinar turpis suscipit at.
 
-![placeholder](http://placehold.it/800x400 "Large example image")
-![placeholder](http://placehold.it/400x200 "Medium example image")
-![placeholder](http://placehold.it/200x200 "Small example image")
+<img src="https://via.placeholder.com/600x400.png?text=Large+example+image" alt="Placeholder" width="600" height="400" />
+<img src="https://via.placeholder.com/400x200.png?text=Medium+example+image" alt="Placeholder" width="400" height="200" />
+<img src="https://via.placeholder.com/200.png?text=Small+example+image" alt="Placeholder" width="200" height="200" />
 
 ### Tables
 
