@@ -1,7 +1,6 @@
-/* Pygments-high-contrast-stylesheets
+/*! Pygments-high-contrast-stylesheets
  * Autumn theme from https://raw.githubusercontent.com/mpchadwick/pygments-high-contrast-stylesheets/gh-pages/autumn.css
  */
-
 .highlight .hll { background-color: #ffffcc; }
 .highlight { background: #ffffff; }
 .highlight .c { font-style: italic; color: #747474; }
@@ -70,7 +69,6 @@
 .highlight .il { color: #008080; }
 
 /* For single backtick code snippets */
-code.language-plaintext.highlighter-rouge {
-    background-color: #f8f8f8;
-    color: #aa0000;
+code {
+    color: #a50;
 }

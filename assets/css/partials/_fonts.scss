@@ -1,16 +1,20 @@
 /* Font overrides
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-/* Body font */
+$font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
+$font-family-monospace: "Roboto Mono", monospace;
+
+// Body font
 html,
+body,
 .sidebar-about h1,
 .pagination {
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
+    font-family: $font-family-sans-serif;
 }
 
-/* Code font */
+// Code font
 code,
 pre,
 .gist .gist-file {
-  font-family: "Roboto Mono", "Courier New", monospace;
+    font-family: $font-family-monospace;
 }

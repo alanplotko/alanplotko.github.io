@@ -1,4 +1,6 @@
-@use "assets/css/partials/_skeleton";
+// Okay to process with purgecss
+@import "node_modules/normalize.css/normalize";
+@import "node_modules/bootstrap/scss/bootstrap";
 
 /* Page defaults
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -7,7 +9,6 @@ body {
     background-color: #222;
     color: #fff;
     font-family: "Roboto", Helvetica, Arial, sans-serif;
-    font-weight: 300;
 }
 
 /* Particle Canvas
@@ -25,62 +26,65 @@ body {
 /* Main Content
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-// Center on page
-
 .main {
-    position: fixed;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
+    // Headers
+    h1 {
+        margin-bottom: 0;
+        font-weight: 500;
+    }
 
-// Headers
+    // Link icons
+    svg {
+        margin: 0 0.25rem;
+        width: 3rem;
+        height: 3rem;
+        stroke-width: 0;
+        color: #fff;
+        stroke: #fff;
+        fill: #fff;
+    }
 
-@media (min-width: 550px) {
-    .main h1 {
-        font-size: 6rem;
+    a {
+        text-decoration: none;
+        color: #fff;
     }
 }
 
-.main h1 {
-    margin-bottom: 0;
-    font-weight: 500;
-}
+@include media-breakpoint-up(md) {
+    .main {
+        h1 {
+            font-size: 3.75rem;
+        }
 
-// Link icons
-
-.main svg {
-    margin: 0 8px;
-    width: 4.8rem;
-    height: 4.8rem;
-    stroke-width: 0;
-    color: #fff;
-    stroke: #fff;
-    fill: #fff;
-}
-
-.main a {
-    text-decoration: none;
-    color: #fff;
+        h2 {
+            font-size: 2.625rem;
+        }
+    }
 }
 
 // Contact
-
 #contact {
+    font-family: "Roboto Mono", monospace;
     visibility: hidden;
     width: fit-content;
     margin: 35px auto 0;
     text-align: center;
     color: #000;
-    font-size: 1.5rem;
-}
+    font-size: 1rem;
+    padding: 0.625rem 3.125rem;
+    background-color: #f1f1f1;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
 
-pre#contact > code {
-    padding: 1rem 5rem;
-}
+    &.active {
+        visibility: initial;
+    }
 
-#contact.active {
-    visibility: initial;
+    p {
+        margin: 0;
+    }
+
+    p:first-child {
+        margin-bottom: 10px;
+    }
 }

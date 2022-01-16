@@ -38,6 +38,7 @@
         "gulp-uglify": "^3.0.2",
         "lighthouse": "^9.2.0",
         "merge-stream": "^2.0.0",
+        "normalize.css": "^8.0.1",
         "path": "^0.12.7",
         "sass": "^1.45.1",
         "url": "^0.11.0",

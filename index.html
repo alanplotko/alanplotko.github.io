@@ -3,27 +3,28 @@ layout: home
 ---
 
 <div id="particles"></div>
-<div class="container">
-    <div class="row">
-        <div class="main twelve columns centered">
-            <h1>Alan Plotko</h1>
-            <h2>Software Engineer</h2>
-            <a href="https://github.com/alanplotko/" target="_blank" rel="noopener" title="GitHub" alt="GitHub">
-                <svg><use xlink:href="assets/svg/symbol-defs.svg#icon-github"></use></svg>
-            </a>
-            <a href="https://linkedin.com/in/alanplotko/" target="_blank" rel="noopener" title="LinkedIn" alt="LinkedIn">
-                <svg><use xlink:href="assets/svg/symbol-defs.svg#icon-linkedin"></use></svg>
-            </a>
-            <a href="/blog" title="Blog" alt="Blog">
-                <svg><use xlink:href="assets/svg/symbol-defs.svg#icon-pencil"></use></svg>
-            </a>
-            <a href="/assets/pdf/resume.pdf" target="_blank" rel="noopener" title="Resume" alt="Resume">
-                <svg><use xlink:href="assets/svg/symbol-defs.svg#icon-file-pdf-o"></use></svg>
-            </a>
-            <a href="#" title="Contact" alt="Contact" onclick="document.getElementById('contact').classList.toggle('active');return false;">
-                <svg><use xlink:href="assets/svg/symbol-defs.svg#icon-envelope-o"></use></svg>
-            </a>
-            <pre id="contact"><code>You can reach me at: <br /><strong>me [at] alanplotko.com</strong></code></pre>
-        </div>
+<div class="container-fluid main d-flex flex-column min-vh-100 justify-content-center align-items-center">
+    <h1 class="display-3">Alan Plotko</h1>
+    <h2 class="display-4">Software Engineer</h2>
+    <div class="flex-row mt-3">
+        <a href="https://github.com/alanplotko/" target="_blank" rel="noopener" title="GitHub" alt="GitHub">
+            <svg><use xlink:href="assets/svg/symbol-defs.svg#icon-github"></use></svg>
+        </a>
+        <a href="https://linkedin.com/in/alanplotko/" target="_blank" rel="noopener" title="LinkedIn" alt="LinkedIn">
+            <svg><use xlink:href="assets/svg/symbol-defs.svg#icon-linkedin"></use></svg>
+        </a>
+        <a href="/blog" title="Blog" alt="Blog">
+            <svg><use xlink:href="assets/svg/symbol-defs.svg#icon-pencil"></use></svg>
+        </a>
+        <a href="/assets/pdf/resume.pdf" target="_blank" rel="noopener" title="Resume" alt="Resume">
+            <svg><use xlink:href="assets/svg/symbol-defs.svg#icon-file-pdf-o"></use></svg>
+        </a>
+        <a href="#" title="Contact" alt="Contact" onclick="document.getElementById('contact').classList.toggle('active');return false;">
+            <svg><use xlink:href="assets/svg/symbol-defs.svg#icon-envelope-o"></use></svg>
+        </a>
+    </div>
+    <div id="contact">
+        <p class="break">You can reach me at:</p>
+        <p><strong>me [at] alanplotko.com</strong></p>
     </div>
 </div>

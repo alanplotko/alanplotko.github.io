@@ -104,12 +104,12 @@ function buildYaml(cb) {
  */
 
 function watchHtml() {
-    let series = env == 'staging' ? gulp.series(buildJekyll, buildHtml, serviceWorker) : gulp.series(buildJekyll, buildHtml);
+    let series = env == 'staging' ? gulp.series(buildJekyll, buildHtml, buildSass, serviceWorker) : gulp.series(buildJekyll, buildHtml, buildSass);
     gulp.watch(['./*.html', './_includes/*.html', './_layouts/*.html'], series);
 }
 
 function watchSass() {
-    let series = env == 'staging' ? gulp.series(buildJekyll, buildSass, serviceWorker) : gulp.series(buildJekyll, buildSass);
+    let series = env == 'staging' ? gulp.series(buildJekyll, buildHtml, buildSass, serviceWorker) : gulp.series(buildJekyll, buildHtml, buildSass);
     gulp.watch('./assets/css/**/*.{css,scss}', series);
 }
 
