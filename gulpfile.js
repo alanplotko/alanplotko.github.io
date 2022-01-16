@@ -9,8 +9,7 @@ const cp = require('child_process');
 const workboxBuild = require('workbox-build');
 
 // Derive Jekyll environment from environment variable
-const env = process.env.JEKYLL_ENV;
-const config = env == 'production' ? 'prod' : 'dev';
+const env = process.env.JEKYLL_ENV || 'development';
 
 /**
  * Service worker setup with workbox for precaching and runtime caching
@@ -92,7 +91,12 @@ function buildJson() {
 }
 
 function buildYaml(cb) {
-    cp.exec(`./node_modules/.bin/yaml-merge _config/common.yml _config/${config}.yml > _config-${config}.yml`, function (err, stdout, stderr) {
+    let yaml = ['_config/common.yml'];
+    if (env === 'development') {
+        yaml.push('_config/staging.yml');
+    }
+    yaml.push(`_config/${env}.yml`);
+    cp.exec(`./node_modules/.bin/yaml-merge ${yaml.join(' ')} > _config-${env}.yml`, function (err, stdout, stderr) {
         if (stdout) console.log(stdout);
         if (stderr) console.log(stderr);
         cb(err);
@@ -129,7 +133,7 @@ function watchYaml() {
 }
 
 function buildJekyll(cb) {
-    cp.exec(`bundle exec jekyll build --config _config-${config}.yml`, function (err, stdout, stderr) {
+    cp.exec(`bundle exec jekyll build --config _config-${env}.yml`, function (err, stdout, stderr) {
         if (stdout) console.log(stdout);
         if (stderr) console.log(stderr);
         cb(err);
@@ -137,7 +141,7 @@ function buildJekyll(cb) {
 }
 
 function serveJekyll(cb) {
-    cp.exec(`bundle exec jekyll serve --skip-initial-build --config _config-${config}.yml`, function (err, stdout, stderr) {
+    cp.exec(`bundle exec jekyll serve --skip-initial-build --config _config-${env}.yml`, function (err, stdout, stderr) {
         if (stdout) console.log(stdout);
         if (stderr) console.log(stderr);
         cb(err);

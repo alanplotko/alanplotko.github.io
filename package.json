@@ -6,8 +6,9 @@
     "author": "Alan Plotko <5394528+alanplotko@users.noreply.github.com>",
     "license": "MIT",
     "scripts": {
-        "yaml": "yarn yaml-dev & yarn yaml-prod",
+        "yaml": "yarn yaml-dev & yarn yaml-staging & yarn yaml-prod",
         "yaml-dev": "./node_modules/.bin/gulp yaml",
+        "yaml-staging": "JEKYLL_ENV=staging ./node_modules/.bin/gulp yaml",
         "yaml-prod": "JEKYLL_ENV=production ./node_modules/.bin/gulp yaml",
         "dev": "./node_modules/.bin/gulp build",
         "staging": "JEKYLL_ENV=staging ./node_modules/.bin/gulp build",
