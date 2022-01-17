@@ -10,6 +10,8 @@
         "yaml-dev": "./node_modules/.bin/gulp yaml",
         "yaml-staging": "JEKYLL_ENV=staging ./node_modules/.bin/gulp yaml",
         "yaml-prod": "JEKYLL_ENV=production ./node_modules/.bin/gulp yaml",
+        "staticman": "./node_modules/.bin/gulp staticman",
+        "staticman-prod": "JEKYLL_ENV=production ./node_modules/.bin/gulp staticman",
         "dev": "./node_modules/.bin/gulp build",
         "staging": "JEKYLL_ENV=staging ./node_modules/.bin/gulp build",
         "prod": "JEKYLL_ENV=production ./node_modules/.bin/gulp build",

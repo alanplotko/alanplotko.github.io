@@ -91,12 +91,20 @@ function buildJson() {
 }
 
 function buildYaml(cb) {
-    let yaml = ['_config/common.yml'];
+    let jekyllFiles = ['_config/common.yml'];
     if (env === 'development') {
-        yaml.push('_config/staging.yml');
+        jekyllFiles.push('_config/staging.yml');
     }
-    yaml.push(`_config/${env}.yml`);
-    cp.exec(`./node_modules/.bin/yaml-merge ${yaml.join(' ')} > _config-${env}.yml`, function (err, stdout, stderr) {
+    jekyllFiles.push(`_config/${env}.yml`);
+    cp.exec(`./node_modules/.bin/yaml-merge ${jekyllFiles.join(' ')} > _config-${env}.yml`, function (err, stdout, stderr) {
+        if (stdout) console.log(stdout);
+        if (stderr) console.log(stderr);
+        cb(err);
+    });
+}
+
+function buildStaticmanConfig(cb) {
+    cp.exec(`./node_modules/.bin/yaml-merge _config/staticman-common.yml _config/staticman-${env}.yml > staticman.yml`, function (err, stdout, stderr) {
         if (stdout) console.log(stdout);
         if (stderr) console.log(stderr);
         cb(err);
@@ -161,6 +169,9 @@ exports.watch = gulp.parallel(serveJekyll, watchHtml, watchSass, watchJs, watchJ
 
 // Build yaml only
 exports.yaml = buildYaml;
+
+// Build staticman config only
+exports.staticman = buildStaticmanConfig;
 
 // Default to build job
 exports.default = exports.build;

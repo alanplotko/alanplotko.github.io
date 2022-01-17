@@ -1,2 +1,9 @@
 # Google Analytics
 google_analytics: UA-104911692-1
+api:
+  worker: https://worker.alanplotko.com
+  staticman:
+    endpoint: https://comments.alanplotko.com/v3/entry/github/alanplotko/alanplotko.github.io/master/comments
+    reCaptcha:
+      siteKey: 6Lcg5RkeAAAAAFcXcak3poOSuxqm2uW7Ic-aI0z2
+      secret: OQoVeMAmUzMRBVMqq9Bzxzc751O2MJMo0wVOtVCHkylnpUKNglaG4gLIAwGBMDsgwzaiF2WsGJpyK6UE9CmwMAMi5kKtG2w+esOuo3CMApJRsTqBsGFENoCtsE+atrtWJw7Ojo233eKpa4kl0P+TtjWGbTY3XqFbHIKLk8dercKCrl0LsAVN+M0K86OibldCO8Aa86unpUeaiuFuHl0Y8S9lnTw6FPhXkCBuuprXn1pdFivty7Hn3xFDl4Z7ngkbEeZIoOcqr7t0ou0XwBRhWDq8pWVVTOhIEATAKDqvCxULRbstlBV1Y/ytm/F1fccVjvGqwf6y4TJABNs6Kz7CQFcXuAOwEbWgwGxJ0ZUC8Za8Tlzguje4eqIVKVwJHI7mBPbbAHDSnPU1AhalZEpMBbuuNz9bHjdmBexBN2tA3p2n11kO9JnkEvmggyE3MhDQd01c6uDGGvGa8qn6ZQnc6Si1FkeEvHtbUUH1VN2ZE5AR3wYK0YB4EmuN2alI2nKe8kMizwB8GqDaLwCmgcZxbeX+RB9tOBFM0QPXj7wrI3t5jyl41/QQfLuVX6ZjqkVVeDShbgTFC4pzgqlclMFUSN0G7lSJ/aVQe4npGIAwQFWkRfR5s3e2nXahjlHFMJW0RzvnqCUBnRSXvSyXu8yPZFEgilbBdMV8lWyv1mmSI3w=

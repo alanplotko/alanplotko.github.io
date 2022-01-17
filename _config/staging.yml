@@ -4,4 +4,8 @@ author:
 serviceWorker: true
 api:
   worker: http://localhost:8787
-  staticman: http://localhost:8500/v3/entry/github/alanplotko/alanplotko.github.io/develop-blog/comments
+  staticman: 
+    endpoint: http://localhost:8500/v3/entry/github/alanplotko/alanplotko.github.io/develop-blog/comments
+    reCaptcha:
+      siteKey: 6LfM6BkeAAAAAMrLIJvsVJwS87QgtVHijONLnMT5
+      secret: juuC7WUI5/zGZ0zTKGIkEg/eflIOnwp/6jqmHbHtL8AlKsO0j+dLl2aMwgqCfvHF2V83XmrVX87abfotdJ9sYIuPd3i+dVUnZTld7zgZPDI9r+k1GcdriEmc1buwMihownGPMAH300mebezqymBh7VCFtgCrLJqADvt5HZaX8Vl0rGeGOkH6k12jvTCBgJoT8SyB5mJptHAt4oEMqybDCpu8q8DbpYKHWJQg1j4orjOxPbNwi59IIws7yxg7jwxdfk8ImOit26TY7bnSzgr8a5S/Yev/JtpH2x1zlgZ/BMxlYmQEB8/0n1LLT8rxqjja6UgPPdyvg6dmvzT+pJL8xHR+NmAEqdRD9wEtQlmtTqGb1JNxvuRobri5DVqw2x5ORrqlemYEHMDC3X3uPVvw/SUZ1Kx008SDvgJEWYNsZDxQ9yZ4HAae6GSfvm1maeMj31dCNglIr5ZTKuAGKfGVe5FEHLUMIR3v4C3OvZII7/ysPmKxEjnfd1exmygqsXJtm6VmXCVTVOvLYdaFmEkFb6CibYZI6vFDBFIiX6fzoThv/+Ovo2Z4ZqFndPciVXth4JN0165SKniQL7BMOTmL5hZpYPue7gHrgNGFXYRRBbm9yL2EB8H6/lCkKy/6RwMbLdWx9sou16iXww80RO4w0Hh4bh4w1iXCl7hYeIQWRvw=

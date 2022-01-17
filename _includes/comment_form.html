@@ -1,8 +1,8 @@
-<h2 class="page__section-label">Leave a Comment</h2>
+<h1 class="page__section-label">Leave a Comment</h1>
 <p class="instruct text-muted"><small><a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a> is allowed. Email
     address will be hashed and used for <a href="https://en.gravatar.com/">Gravatar</a>.</small></p>
 <form id="comment-form" class="row g-3 page__form js-form form" method="POST"
-    action="{{ site.api.staticman }}">
+    action="{{ site.api.staticman.endpoint }}">
 
     <!-- Start comment form alert messaging -->
     <div class="col-12 d-none js-notice alert alert-success mb-0" role="alert">

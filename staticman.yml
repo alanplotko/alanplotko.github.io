@@ -1,79 +1,38 @@
-# Name of the property. You can have multiple properties with completely
-# different config blocks for different sections of your site.
-# For example, you can have one property to handle comment submission and
-# another one to handle posts.
 comments:
-  # (*) REQUIRED
-  #
-  # Names of the fields the form is allowed to submit. If a field that is
-  # not here is part of the request, an error will be thrown.
-  allowedFields: ["name", "email", "message", "replying_to_uid"]
-
-  # (*) REQUIRED
-  #
-  # Name of the branch being used. Must match the one sent in the URL of the
-  # request.
-  branch: "develop-blog"
-
-  # Text to use as the commit message or pull request title. Accepts placeholders.
-  commitMessage: "Add comment via Staticman"
-
-  # (*) REQUIRED
-  #
-  # Destination path (filename) for the data files. Accepts placeholders.
-  filename: "comment-{@timestamp}"
-
-  # The format of the generated data files. Accepted values are "json", "yaml"
-  # or "frontmatter"
-  format: "yml"
-
-  # List of fields to be populated automatically by Staticman and included in
-  # the data file. Keys are the name of the field. The value can be an object
-  # with a `type` property, which configures the generated field, or any value
-  # to be used directly (e.g. a string, number or array)
+  allowedFields:
+    - name
+    - email
+    - message
+    - replying_to_uid
+  branch: develop-blog
+  commitMessage: Add comment via Staticman
+  filename: comment-{@timestamp}
+  format: yml
   generatedFields:
     date:
       type: date
       options:
-        format: "iso8601"
-
-  # Whether entries need to be appproved before they are published to the main
-  # branch. If set to `true`, a pull request will be created for your approval.
-  # Otherwise, entries will be published to the main branch automatically.
+        format: iso8601
   moderation: true
-
-  allowedOrigins: ["localhost", "alanplotko.com"]
-
-  # Name of the site. Used in notification emails.
-  name: "Alan Plotko - Blog"
-
-  # Notification settings. When enabled, users can choose to receive notifications
-  # via email when someone adds a reply or a new comment. This requires an account
-  # with Mailgun, which you can get for free at http://mailgun.com.
-  #notifications:
-    # Enable notifications
-    #enabled: true
-
-    # (!) ENCRYPTED
-    #
-    # Mailgun API key
-    #apiKey: "1q2w3e4r"
-
-    # (!) ENCRYPTED
-    #
-    # Mailgun domain (encrypted)
-    #domain: "4r3e2w1q"
-
-  # (*) REQUIRED
-  #
-  # Destination path (directory) for the data files. Accepts placeholders.
-  path: "_data/comments/{options.slug}"
-
-  # Names of required fields. If any of these isn't in the request or is empty,
-  # an error will be thrown.
-  requiredFields: ["name", "email", "message"]
-
-  # List of transformations to apply to any of the fields supplied. Keys are
-  # the name of the field and values are possible transformation types.
+  name: Alan Plotko - Blog
+  path: _data/comments/{options.slug}
+  requiredFields:
+    - name
+    - email
+    - message
   transforms:
     email: md5
+  reCaptcha:
+    enabled: true
+    version: v3
+    siteKey: 6LfM6BkeAAAAAMrLIJvsVJwS87QgtVHijONLnMT5
+    secret: >-
+      juuC7WUI5/zGZ0zTKGIkEg/eflIOnwp/6jqmHbHtL8AlKsO0j+dLl2aMwgqCfvHF2V83XmrVX87abfotdJ9sYIuPd3i+dVUnZTld7zgZPDI9r+k1GcdriEmc1buwMihownGPMAH300mebezqymBh7VCFtgCrLJqADvt5HZaX8Vl0rGeGOkH6k12jvTCBgJoT8SyB5mJptHAt4oEMqybDCpu8q8DbpYKHWJQg1j4orjOxPbNwi59IIws7yxg7jwxdfk8ImOit26TY7bnSzgr8a5S/Yev/JtpH2x1zlgZ/BMxlYmQEB8/0n1LLT8rxqjja6UgPPdyvg6dmvzT+pJL8xHR+NmAEqdRD9wEtQlmtTqGb1JNxvuRobri5DVqw2x5ORrqlemYEHMDC3X3uPVvw/SUZ1Kx008SDvgJEWYNsZDxQ9yZ4HAae6GSfvm1maeMj31dCNglIr5ZTKuAGKfGVe5FEHLUMIR3v4C3OvZII7/ysPmKxEjnfd1exmygqsXJtm6VmXCVTVOvLYdaFmEkFb6CibYZI6vFDBFIiX6fzoThv/+Ovo2Z4ZqFndPciVXth4JN0165SKniQL7BMOTmL5hZpYPue7gHrgNGFXYRRBbm9yL2EB8H6/lCkKy/6RwMbLdWx9sou16iXww80RO4w0Hh4bh4w1iXCl7hYeIQWRvw=
+  akismet:
+    enabled: true
+    author: name
+    authorEmail: email
+    content: message
+    type: comment
+  allowedOrigins:
+    - localhost
