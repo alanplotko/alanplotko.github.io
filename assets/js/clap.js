@@ -5,6 +5,7 @@ const clapBtn = document.querySelector(".applause-button");
 const clapSpinner = document.querySelector(".applause-count-spinner");
 const clapCount = document.querySelector(".applause-count");
 const clapBufferCount = document.querySelector(".applause-buffer-count");
+const clapMessageContainer = document.querySelector(".applause-message-container");
 const multiclapCountdown = document.querySelector(".applause-multiclap-countdown");
 
 var cachedCount = 0;
@@ -27,7 +28,15 @@ const getClaps = (api, url) =>
         },
     })
         .then(response => response.text())
-        .then(res => Number(res));
+        .then(res => Number(res))
+        .catch(() => {
+            clapBtn.setAttribute("disabled", "disabled");
+            if (clapCount.classList.contains("d-none")) {
+                clapCount.classList.remove("d-none");
+            }
+            clapCount.innerHTML = "OFFLINE";
+            clapMessageContainer.innerHTML = "Service is offline. Please try again later.";
+        });
 
 const updateClaps = (api, url, claps) =>
     fetch(`${api}/clap?url=${url}`, {
@@ -47,24 +56,38 @@ const updateCount = debounce(() => {
             MAX_CLAPS - totalClaps
         );
         // Send number claps and confirm if accepted by server
-        updateClaps(clapData.attributes.api.value, clapData.attributes.url.value, increment).then(updatedClapCount => {
-            if (updatedClapCount === cachedCount) {
-                // If claps match (thereby rejected by server), then disable button
-                clapBtn.setAttribute("disabled", "disabled");
+        updateClaps(clapData.attributes.api.value, clapData.attributes.url.value, increment)
+            .then(updatedClapCount => {
+                if (updatedClapCount === cachedCount) {
+                    // If claps match (thereby rejected by server), then disable button
+                    clapBtn.setAttribute("disabled", "disabled");
+                    clapCount.innerHTML = updatedClapCount;
+                }
+                cachedCount = updatedClapCount;
+                clapBufferCount.innerHTML = '';
                 clapCount.innerHTML = updatedClapCount;
-            }
-            cachedCount = updatedClapCount;
-            clapBufferCount.innerHTML = '';
-            clapCount.innerHTML = updatedClapCount;
-            totalClaps += increment;
-            bufferedClaps = 0;
-            if (clapCount.classList.contains("d-none")) {
-                clapCount.classList.remove("d-none");
-            }
-            if (!clapBufferCount.classList.contains("d-none")) {
-                clapBufferCount.classList.add("d-none");
-            }
-        });
+                totalClaps += increment;
+                bufferedClaps = 0;
+                if (clapCount.classList.contains("d-none")) {
+                    clapCount.classList.remove("d-none");
+                }
+                if (!clapBufferCount.classList.contains("d-none")) {
+                    clapBufferCount.classList.add("d-none");
+                }
+            })
+            .catch(() => {
+                clapBtn.setAttribute("disabled", "disabled");
+                clapBufferCount.innerHTML = '';
+                bufferedClaps = 0;
+                if (!clapBufferCount.classList.contains("d-none")) {
+                    clapBufferCount.classList.add("d-none");
+                }
+                if (clapCount.classList.contains("d-none")) {
+                    clapCount.classList.remove("d-none");
+                }
+                clapCount.innerHTML = "OFFLINE";
+                clapMessageContainer.innerHTML = "Service is offline. Please try again later.";
+            });
     }
 }, 2000);
 
