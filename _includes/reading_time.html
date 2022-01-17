@@ -1,25 +1,19 @@
-{%- assign words_per_minute = site.words_per_minute | default: 180 -%}
-
+{%- comment -%}Medium defaults to an average of 265 wpm{%- endcomment -%}
+{%- assign words_per_minute = site.words_per_minute | default: 265 -%}
 {%- assign post_content = include.content -%}
 
 {%- if post_content -%}
-  {%- assign words = post_content | strip_html | number_of_words -%}
-{%- endif -%}
+  {%- assign words_total = post_content | strip_html | number_of_words -%}
+  {%- assign words_without_code = post_content | replace: '<pre class="highlight">', '<!--' | replace: '</pre>', '-->' | strip_html | number_of_words -%}
+  {%- assign number_images = include.content | split: '<img' | size | minus: 1 | at_least: 0 -%}
 
-{%- if words %}
-  {%- comment -%}### TOTAL_WORDS ###{%- endcomment -%}
-  {%- if words <= 1 -%}
-    {%- assign total_words = 1 | append: ' word' -%}
-  {%- else -%}
-    {%- assign total_words = words | append: ' words' -%}
-  {%- endif -%}
+  {%- comment -%}Medium adds 12s per image{%- endcomment -%}
+  {%- assign additional_time_images = number_images | times: 12.0 | | divided_by: 60.0 -%}
 
-  {%- comment -%}### READING_TIME ###{%- endcomment -%}
+  {%- comment -%}Give additional weight to reading code{%- endcomment -%}
+  {%- assign words_code = words_total | minus: words_without_code | times: 2.0 -%}
+  {%- assign words = words_without_code | plus: words_code | ceil -%}
+
   {%- assign wpm = words_per_minute | times: 1.0 -%}
-  {%- assign read_time = words | divided_by: wpm | round -%}
-  {%- if read_time <= 1 -%}
-    {%- assign reading_time = 1 | append: ' min' -%}
-  {%- else -%}
-    {%- assign reading_time = read_time | append: ' min' -%}
-  {%- endif -%}
+  {%- assign reading_time = words | divided_by: wpm | plus: additional_time_images | ceil | at_least: 1 | append: ' min' -%}
 {%- endif -%}
