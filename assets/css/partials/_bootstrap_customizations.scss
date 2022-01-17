@@ -1,0 +1,49 @@
+/* Override bootstrap colors
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+$primary: #0d6efd;
+$secondary: #666;
+$dark: #222;
+
+/* Font overrides
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+$font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
+$font-family-monospace: "Roboto Mono", monospace;
+
+// Body font
+html,
+body,
+.sidebar-about h1,
+.pagination {
+    font-family: $font-family-sans-serif;
+}
+
+// Code font
+code,
+pre,
+.gist .gist-file {
+    font-family: $font-family-monospace;
+}
+
+/* Add huge breakpoint for TOC
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+    huge: 1700px
+);
+
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1320px,
+    huge: 1600px
+);

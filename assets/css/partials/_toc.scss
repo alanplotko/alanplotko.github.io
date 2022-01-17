@@ -1,39 +1,76 @@
 /* Table of Contents
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-$toc-link-font-size: 16px;
+$toc-link-font-size: 20px;
+$toc-link-font-size-small: 16px;
 
-.section-toc {
+// Floating TOC section
+.section-toc-floating {
     position: sticky;
     top: 0;
+    padding: 20px;
     max-width: fit-content;
     overflow-y: auto;
-    padding: 20px;
 }
 
-a.toc-menu-option {
-    font-size: $toc-link-font-size;
-}
-
-.section-toc ul {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 0;
-
-    a {
-        font-size: $toc-link-font-size;
-    }
-
+// TOC common styles
+ul#toc-embedded,
+ul#toc-extra,
+ul#toc-floating,
+ul#toc-extra-floating {
     li.toc-h2 > a {
         font-weight: 700;
     }
 
     ul.toc-sublist {
+        list-style: none;
         padding-left: 16px;
         margin-bottom: 0;
     }
 
     ul.toc-sublist ul {
         padding-left: 0;
+    }
+}
+
+// Embedded TOC only
+ul#toc-embedded,
+ul#toc-extra {
+    list-style: disc;
+
+    ul.toc-sublist {
+        list-style: circle;
+        padding-left: 30px;
+    }
+
+    li,
+    a.toc-menu-option,
+    ul a {
+        font-size: $toc-link-font-size;
+    }
+}
+
+// Floating TOC only
+ul#toc-floating,
+ul#toc-extra-floating {
+    list-style: none;
+    padding-left: 0;
+
+    li,
+    a.toc-menu-option,
+    ul a {
+        font-size: $toc-link-font-size-small;
+    }
+}
+
+@include media-breakpoint-up(huge) {
+    .section-toc-embedded {
+        display: none;
+    }
+}
+
+@include media-breakpoint-down(huge) {
+    .section-toc-floating {
+        display: none;
     }
 }
