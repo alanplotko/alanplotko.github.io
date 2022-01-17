@@ -1,30 +1,47 @@
 <div class="sidebar-about">
-    <a href="{{ site.baseurl | append: 'blog' }}">
-        <img class="sidebar-logo" src="/assets/images/icon-192.png" title="Logo" alt="Logo" />
-    </a>
-    <h1>
-        <a href="{{ site.baseurl | append: 'blog' }}">
-            {{ site.title }}
-        </a>
-    </h1>
-    <p class="lead">{{ site.description }}</p>
+    <header class="navbar navbar-expand-md navbar-dark">
+        <nav class="container-fluid ps-3 pe-3 flex-wrap flex-md-nowrap" aria-label="Main navigation">
+            <a class="navbar-brand text-decoration-none d-md-none p-0 me-2 flex-grow-1 text-start" href="{{ site.baseurl | append: 'blog' }}" aria-label="{{ site.title }}">
+                <img class="sidebar-logo-mobile m-0 d-inline-block align-middle" src="/assets/images/icon-192.png" title="Logo" alt="Logo" />
+                <span>{{ site.title }}</span>
+            </a>
+
+            <button class="navbar-toggler border-0 p-0 flex-shrink-0" type="button" aria-label="Toggle navigation" onclick="['d-none', 'd-md-flex'].forEach(c => document.querySelector('#fullNav').classList.toggle(c));return false;">
+                <svg class="align-middle"><use xlink:href="/assets/svg/symbol-defs.svg#icon-bars"></use></svg>
+            </button>
+        </nav>
+    </header>
+
+    <div id="fullNav" class="container d-none d-flex d-md-flex flex-column align-items-center justify-content-center text-center">
+        <div class="d-none d-md-block">
+            <a href="{{ site.baseurl | append: 'blog' }}">
+                <img class="sidebar-logo mx-auto" src="/assets/images/icon-192.png" title="Logo" alt="Logo" />
+            </a>
+            <h1>
+                <a href="{{ site.baseurl | append: 'blog' }}">
+                    {{ site.title }}
+                </a>
+            </h1>
+            <p class="lead">{{ site.description }}</p>
+        </div>
+
+        <nav class="nav flex-column mb-4">
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link{% if page.url == '/blog/index.html' or page.url contains '/blog/page/' %} active fw-bold"
+                aria-current="page{% endif %}" href="{{ site.baseurl | append: 'blog' }}">Blog</a>
+            {%- assign pages_list = site.pages -%}
+            {%- for node in pages_list -%}
+            {%- if node.title != null and node.layout == "page" -%}
+            <a class="nav-link{% if page.url == node.url %} active fw-bold" aria-current="page{% endif %}"
+                href="{{ node.url }}">{{ node.title }}</a>
+            {%- endif -%}
+            {%- endfor -%}
+            <!-- <button id="darkmode-button" class="btn btn-dark btn-sm ms-3 mt-3" onclick="darkmode.toggleDarkMode();return false;">
+                <svg class="d-light-inline" title="Switch to dark mode"><use xlink:href="/assets/svg/symbol-defs.svg#icon-moon-o"></use></svg>
+                <svg class="d-dark-inline" title="Switch to light mode"><use xlink:href="/assets/svg/symbol-defs.svg#icon-sun-o"></use></svg>
+            </button> -->
+        </nav>
+        
+        <p class="d-none d-md-block">&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
+    </div>
 </div>
-
-<nav class="nav flex-column mb-4">
-    <a class="nav-link" href="/">Home</a>
-    <a class="nav-link{% if page.url == '/blog/index.html' or page.url contains '/blog/page/' %} active fw-bold"
-        aria-current="page{% endif %}" href="{{ site.baseurl | append: 'blog' }}">Blog</a>
-    {%- assign pages_list = site.pages -%}
-    {%- for node in pages_list -%}
-    {%- if node.title != null and node.layout == "page" -%}
-    <a class="nav-link{% if page.url == node.url %} active fw-bold" aria-current="page{% endif %}"
-        href="{{ node.url }}">{{ node.title }}</a>
-    {%- endif -%}
-    {%- endfor -%}
-    <!-- <button id="darkmode-button" class="btn btn-dark btn-sm ms-3 mt-3" onclick="darkmode.toggleDarkMode();return false;">
-        <svg class="d-light-inline" title="Switch to dark mode"><use xlink:href="/assets/svg/symbol-defs.svg#icon-moon-o"></use></svg>
-        <svg class="d-dark-inline" title="Switch to light mode"><use xlink:href="/assets/svg/symbol-defs.svg#icon-sun-o"></use></svg>
-    </button> -->
-</nav>
-
-<p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>

@@ -8,37 +8,55 @@
     bottom: 0;
     left: 0;
     background-color: $dark;
-    text-align: left;
-    padding: 2.5rem 2rem;
+    padding: 0;
     color: rgba(255, 255, 255, 0.5);
     width: 360px;
-}
 
-#sidebar a {
-    color: #fff;
-}
-
-#darkmode-button {
-    width: 96px;
-
-    svg {
-        width: 36px;
-        height: 36px;
-        stroke-width: 0;
+    a {
         color: #fff;
-        stroke: #fff;
-        fill: #fff;
     }
-}
 
-// Logo at 100px
-#sidebar .sidebar-logo {
-    width: 100px;
-    height: 100px;
-}
+    header {
+        min-height: 60px;
+        padding: 12px 0;
+    }
 
-#sidebar .sidebar-about h1 {
-    font-size: 2.5rem;
+    .navbar-toggler svg {
+        width: 32px;
+        height: 32px;
+        stroke-width: 0;
+        stroke: currentColor;
+        fill: currentColor;
+    }
+
+    #darkmode-button {
+        width: 96px;
+
+        svg {
+            width: 36px;
+            height: 36px;
+            stroke-width: 0;
+            color: #fff;
+            stroke: #fff;
+            fill: #fff;
+        }
+    }
+
+    // Desktop view
+    .sidebar-logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    // Mobile view
+    .sidebar-logo-mobile {
+        width: 32px;
+        height: 32px;
+    }
+
+    .sidebar-about h1 {
+        font-size: 2.5rem;
+    }
 }
 
 @include media-breakpoint-down(lg) {
@@ -53,15 +71,19 @@
         text-align: center;
         flex: 0 0 auto;
         width: 100%;
-    }
 
-    // Center logo when sidebar collapses in responsive mobile view
-    .sidebar-logo {
-        margin: 0 auto 1rem auto;
-    }
+        // Center logo when sidebar collapses in responsive mobile view
+        .sidebar-logo {
+            margin: 0 auto 1rem auto;
+        }
 
-    // Center logo when sidebar collapses in responsive mobile view
-    .sidebar-logo {
-        margin: 0 auto 1rem auto;
+        // Center logo when sidebar collapses in responsive mobile view
+        .sidebar-logo {
+            margin: 0 auto 1rem auto;
+        }
+
+        #fullNav {
+            display: none;
+        }
     }
 }
