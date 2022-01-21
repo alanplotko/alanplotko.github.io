@@ -31,11 +31,6 @@
     {% include comment_form.html %}
 </div>
 <!-- End new comment form -->
-<!-- Load reCaptcha if site key is set -->
-{% if site.staticman.reCaptcha.siteKey %}
-<script async src="https://www.google.com/recaptcha/api.js"></script>
-{% endif %}
-
 {% else %}
 <p class="lead"><em>Comments are closed for this post.</em></p>
 {% endunless %}

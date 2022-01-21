@@ -8,9 +8,9 @@ document.getElementById('comment-form').addEventListener('submit', function (e) 
     const submitBtn = document.getElementById('comment-form-submit');
     const cancelReplyBtn = document.getElementById('cancel-comment-reply-link');
     submitBtn.blur()
-    const fields = document.querySelectorAll('#comment-form input[required], #comment-form textarea[required]');
-    submitBtn.classList.add('disabled');
-    cancelReplyBtn.classList.add('disabled');
+    const fields = document.querySelectorAll('#comment-form-email, #comment-form-name, #comment-form-message');
+    submitBtn.setAttribute("disabled", "disabled");
+    cancelReplyBtn.classList.add("d-none");
     fields.forEach(node => setAttributes(node, {
         'disabled': '',
         'aria-disabled': 'disabled',
@@ -30,8 +30,8 @@ document.getElementById('comment-form').addEventListener('submit', function (e) 
         console.log(err);
         submitBtn.innerHTML = 'Submit Comment';
         document.querySelector('#comment-form .js-notice.alert-danger').classList.remove('d-none');
-        submitBtn.classList.remove('disabled');
-        cancelReplyBtn.classList.remove('disabled');
+        submitBtn.removeAttribute("disabled");
+        cancelReplyBtn.classList.remove("d-none");
         fields.forEach(node => removeAttributes(node, ['disabled', 'aria-disabled', 'tabindex']));
     });
 
