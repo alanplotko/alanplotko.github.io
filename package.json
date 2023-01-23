@@ -10,6 +10,7 @@
         "yaml-dev": "./node_modules/.bin/gulp yaml",
         "yaml-staging": "JEKYLL_ENV=staging ./node_modules/.bin/gulp yaml",
         "yaml-prod": "JEKYLL_ENV=production ./node_modules/.bin/gulp yaml",
+        "docker-dev": "docker compose -f ./docker/development.yaml --env-file ./docker/config/.env.dev up",
         "staticman": "./node_modules/.bin/gulp staticman",
         "staticman-prod": "JEKYLL_ENV=production ./node_modules/.bin/gulp staticman",
         "dev": "./node_modules/.bin/gulp build",
@@ -22,8 +23,8 @@
         "serve-prod": "JEKYLL_ENV=production ./node_modules/.bin/gulp serve",
         "test": "yarn lighthouse-all",
         "lighthouse-all": "yarn lighthouse-desktop & yarn lighthouse-mobile",
-        "lighthouse-desktop": "./node_modules/.bin/lighthouse http://localhost:4000 --preset=desktop --quiet --chrome-flags='--headless' --view --output-path ./reports/lighthouse-desktop.html",
-        "lighthouse-mobile": "./node_modules/.bin/lighthouse http://localhost:4000 --quiet --chrome-flags='--headless' --view --output-path ./reports/lighthouse-mobile.html"
+        "lighthouse-desktop": "./node_modules/.bin/lighthouse http://localhost:4000/blog/whats-jekyll --preset=desktop --quiet --chrome-flags='--headless' --view --output-path ./reports/lighthouse-desktop.html",
+        "lighthouse-mobile": "./node_modules/.bin/lighthouse http://localhost:4000/blog/whats-jekyll --quiet --chrome-flags='--headless' --view --output-path ./reports/lighthouse-mobile.html"
     },
     "devDependencies": {
         "@alexlafroscia/yaml-merge": "^4.1.0",

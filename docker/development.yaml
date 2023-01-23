@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  analytics:
+    image: docker.umami.dev/umami-software/umami:postgresql-latest
+    ports:
+      - 3000:3000
+    environment:
+      DATABASE_URL: ${UMAMI_DB_URL}
+      DATABASE_TYPE: postgresql
+      HASH_SALT: ${UMAMI_HASH_SALT}
+      TRACKER_SCRIPT_NAME: ${UMAMI_SCRIPT_NAME}
+      COLLECT_API_ENDPOINT: ${UMAMI_ENDPOINT}
+      DISABLE_TELEMETRY: 1

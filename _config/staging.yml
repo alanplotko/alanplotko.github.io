@@ -1,8 +1,8 @@
 url: http://localhost:4000
 author:
   url: http://localhost:4000
-serviceWorker: true
+service_worker: true
 api:
   worker: http://localhost:8787
-  staticman: 
+  staticman:
     endpoint: http://localhost:8500/v3/entry/github/alanplotko/alanplotko.github.io/develop-blog/comments

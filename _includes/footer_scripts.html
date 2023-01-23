@@ -2,8 +2,25 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js" integrity="sha512-Kef5sc7gfTacR7TZKelcrRs15ipf7+t+n7Zh6mKNJbmW+/RRdCW9nwfLn4YX0s2nO6Kv5Y2ChqgIakaC6PW09A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {%- endif -%}
 {%- if page.layout == 'post' -%}
-<script async type="text/javascript" src="/assets/js/comments.js"></script>
-<script defer type="text/javascript" src="/assets/js/clap.js"></script>
+<script defer type="text/javascript" src="/assets/js/claps.js"></script>
+{%- if site.render_comments -%}
+<script defer src="{{ site.comments_origin }}/client.js"
+        data-repo="{{ site.comments_repo }}"
+        data-repo-id="{{ site.comments_repo_id }}"
+        data-category="{{ site.comments_category }}"
+        data-category-id="{{ site.comments_category_id }}"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+{%- endif -%}
 {%- endif -%}
 {%- if jekyll.environment == 'production' -%}
 <script type="text/javascript">
@@ -30,7 +47,7 @@
     });
     {%- endif -%}
 </script>
-{%- elsif site.serviceWorker -%}
+{%- elsif site.service_worker -%}
 <script type="text/javascript">
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
@@ -51,4 +68,7 @@
         particlesJS.load("particles", "/assets/json/particlesjs-config.json");
     });
 </script>
+{%- endif -%}
+{%- if site.collect_events -%}
+<script async defer data-website-id="baf21bb8-48d2-424a-ba21-a6f5be16194f" src="{{ site.events_origin }}/events.js"></script>
 {%- endif -%}

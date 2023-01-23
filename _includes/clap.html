@@ -1,5 +1,5 @@
-<div class="applause-container" url="{{ page.slug }}" api="{{ site.api.worker }}">
-    <button type="button" class="btn btn-secondary applause-button d-flex align-items-center">
+<div class="applause-container" api="{{ site.api_origin }}" slug="{{ page.slug }}">
+    <button type="button" class="btn btn-secondary applause-button d-flex align-items-center" disabled>
         <svg class="applause-icon"><use xlink:href="/assets/svg/symbol-defs.svg#icon-clap"></use></svg>
         <span class="applause-count-spinner spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
         <span class="applause-count ps-2 d-none"></span>

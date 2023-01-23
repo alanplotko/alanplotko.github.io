@@ -24,7 +24,9 @@ layout: default
         <h1 id="further-reading">Further Reading</h1>
         {%- include section_recent_posts.html -%}
         <div class="pt-3"></div>
-        {%- include section_comments.html -%}
+        {%- if site.render_comments -%}
+        <div class="giscus"></div>
+        {%- endif -%}
         <div class="p-5"></div>
     </div>
     <div id="side-content" class="col gy-5">

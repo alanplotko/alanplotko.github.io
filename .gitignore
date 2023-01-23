@@ -105,6 +105,10 @@ web_modules/
 .env.production.local
 .env.local
 
+# Docker configs and volumes
+docker/config
+docker/volumes
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
@@ -142,7 +146,8 @@ dist
 # TernJS port file
 .tern-port
 
-# Stores VSCode versions used for testing VSCode extensions
+# Stores VSCode settings and versions used for testing VSCode extensions
+.vscode/
 .vscode-test
 
 # yarn v2
