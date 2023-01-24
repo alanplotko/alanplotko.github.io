@@ -10,17 +10,24 @@ plugins:
   - jekyll/tagging
   - jekyll-seo-tag
 
+##########################
 # Custom settings
-service_worker: true
-render_comments: true
-collect_events: true
-events_origin: https://events.alanplotko.com
-comments_origin: https://comments.alanplotko.com
-api_origin: https://api.alanplotko.com
+##########################
+# Service worker
+service_worker_enabled: false
+# Events
+events_enabled: false
+events_origin: http://localhost:3000
+events_website_id: baf21bb8-48d2-424a-ba21-a6f5be16194fa
+# Comments
+comments_enabled: false
+comments_origin: http://localhost:5000
 comments_repo: alanplotko/alanplotko.github.io
 comments_repo_id: MDEwOlJlcG9zaXRvcnkyODY1NTk5OA==
 comments_category: 'Blog Post Discussions'
 comments_category_id: DIC_kwDOAbVBfs4CTvsV
+# API
+api_origin: http://api-apblog.vercel.app
 
 # Tagging
 tag_page_layout: tag_page
@@ -51,11 +58,11 @@ permalink:        /blog/:slug
 title:            'Alan Plotko'
 tagline:          'Blog'
 description:      "A blog where I write about stuff I'm up to"
-url:              https://www.alanplotko.com
 baseurl:          /
+url:              http://localhost:4000
 author:
+  url:            http://localhost:4000
   name:           'Alan Plotko'
-  url:            https://www.alanplotko.com
 
 # Pagination
 pagination:

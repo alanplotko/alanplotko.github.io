@@ -103,14 +103,6 @@ function buildYaml(cb) {
   });
 }
 
-function buildStaticmanConfig(cb) {
-  cp.exec(`./node_modules/.bin/yaml-merge _config/staticman-common.yml _config/staticman-${env}.yml > staticman.yml`, function (err, stdout, stderr) {
-    if (stdout) console.log(stdout);
-    if (stderr) console.log(stderr);
-    cb(err);
-  });
-}
-
 /**
  * Watch assets and rebuild Jekyll for local development
  */
@@ -169,9 +161,6 @@ exports.watch = gulp.parallel(serveJekyll, watchHtml, watchSass, watchJs, watchJ
 
 // Build yaml only
 exports.yaml = buildYaml;
-
-// Build staticman config only
-exports.staticman = buildStaticmanConfig;
 
 // Default to build job
 exports.default = exports.build;

@@ -1,6 +1,14 @@
-# Google Analytics
-google_analytics: UA-104911692-1
-api:
-  worker: https://worker.alanplotko.com
-  staticman:
-    endpoint: https://comments.alanplotko.com/v3/entry/github/alanplotko/alanplotko.github.io/master/comments
+# Author metadata
+url:              https://www.alanplotko.com
+author:
+  url:            https://www.alanplotko.com
+
+# Origins
+events_origin: https://events.alanplotko.com
+comments_origin: https://comments.alanplotko.com
+api_origin: https://api.alanplotko.com
+
+# Enable all
+service_worker_enabled: true
+comments_enabled: true
+events_enabled: true
