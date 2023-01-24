@@ -1,7 +1,19 @@
 version: "3.9"
 
 services:
+  db:
+    container_name: db-apblog
+    image: postgres:12-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ${POSTGRES_VOLUME_PATH}:/var/lib/postgresql/data
   analytics:
+    container_name: analytics-apblog
     image: docker.umami.dev/umami-software/umami:postgresql-latest
     ports:
       - 3000:3000
@@ -14,13 +26,19 @@ services:
       DISABLE_TELEMETRY: 1
     depends_on:
       - db
-  db:
-    image: postgres:12-alpine
+  api:
+    container_name: api-apblog
+    build:
+      context: ${API_PROJECT_PATH}
+      target: runner
     ports:
-      - 5432:5432
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - ${POSTGRES_VOLUME_PATH}:/var/lib/postgresql/data
+      - 5000:5000
+    depends_on:
+      - db
+  comments:
+    container_name: comments-apblog
+    build:
+      context: ${COMMENTS_PROJECT_PATH}
+      target: runner
+    ports:
+      - 6000:6000
