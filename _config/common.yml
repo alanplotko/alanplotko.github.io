@@ -21,13 +21,13 @@ events_origin: http://localhost:3000
 events_website_id: baf21bb8-48d2-424a-ba21-a6f5be16194fa
 # Comments
 comments_enabled: false
-comments_origin: http://localhost:5000
+comments_origin: http://localhost:6000
 comments_repo: alanplotko/alanplotko.github.io
 comments_repo_id: MDEwOlJlcG9zaXRvcnkyODY1NTk5OA==
 comments_category: 'Blog Post Discussions'
 comments_category_id: DIC_kwDOAbVBfs4CTvsV
 # API
-api_origin: http://api-apblog.vercel.app
+api_origin: http://localhost:5000
 
 # Tagging
 tag_page_layout: tag_page

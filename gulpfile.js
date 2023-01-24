@@ -92,9 +92,6 @@ function buildJson() {
 
 function buildYaml(cb) {
   let jekyllFiles = ['_config/common.yml'];
-  if (env === 'development') {
-    jekyllFiles.push('_config/staging.yml');
-  }
   jekyllFiles.push(`_config/${env}.yml`);
   cp.exec(`./node_modules/.bin/yaml-merge ${jekyllFiles.join(' ')} > _config-${env}.yml`, function (err, stdout, stderr) {
     if (stdout) console.log(stdout);

@@ -8,7 +8,14 @@ const clapBufferCount = document.querySelector(".applause-buffer-count");
 const clapMessageContainer = document.querySelector(".applause-message-container");
 const multiclapCountdown = document.querySelector(".applause-multiclap-countdown");
 
-var totalClaps = parseInt(window.localStorage.getItem(clapData.attributes.slug.value)) || 0;
+const storagePostKey = `apblog-${clapData.attributes.slug.value}`;
+const storageUserKey = 'apblog-storage-user-id';
+var totalClaps = parseInt(window.localStorage.getItem(storagePostKey)) || 0;
+var userId = window.localStorage.getItem(storageUserKey);
+if (userId === null) {
+  userId = window.crypto.randomUUID();
+  window.localStorage.setItem(storageUserKey, userId);
+}
 var bufferedClaps = 0;
 var confirmTimer, holdTimer, countdownTimer;
 
@@ -63,7 +70,10 @@ const updateCount = debounce(() => {
         clapBufferCount.innerHTML = '';
         clapCount.innerHTML = updatedClapCount;
         totalClaps += increment;
-        window.localStorage.setItem(clapData.attributes.slug.value, totalClaps);
+        window.localStorage.setItem(storagePostKey, totalClaps);
+        if (window.umami) {
+          window.umami.trackEvent(`Clapped for ${clapData.attributes.slug.value}`, { type: 'claps', userId: userId, claps: increment, postSlug: clapData.attributes.slug.value });
+        }
         bufferedClaps = 0;
         if (clapCount.classList.contains("d-none")) {
           clapCount.classList.remove("d-none");
