@@ -1,4 +1,0 @@
-service_worker: false
-api_origin: http://api-apblog.vercel.app
-render_comments: false
-collect_events: false
