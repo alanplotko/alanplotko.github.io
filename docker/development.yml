@@ -14,16 +14,15 @@ services:
       - ${POSTGRES_VOLUME_PATH}:/var/lib/postgresql/data
   analytics:
     container_name: analytics-apblog
-    image: docker.umami.dev/umami-software/umami:postgresql-latest
+    build:
+      context: ${ANALYTICS_PROJECT_PATH}
+      target: runner
+      args:
+        - DATABASE_TYPE=postgres
+    env_file:
+      - ${ANALYTICS_PROJECT_PATH}/.env.local
     ports:
       - 3000:3000
-    environment:
-      DATABASE_URL: ${UMAMI_DB_URL}
-      DATABASE_TYPE: postgresql
-      HASH_SALT: ${UMAMI_HASH_SALT}
-      TRACKER_SCRIPT_NAME: ${UMAMI_SCRIPT_NAME}
-      COLLECT_API_ENDPOINT: ${UMAMI_ENDPOINT}
-      DISABLE_TELEMETRY: 1
     depends_on:
       - db
   api:
@@ -31,6 +30,8 @@ services:
     build:
       context: ${API_PROJECT_PATH}
       target: runner
+    env_file:
+      - ${API_PROJECT_PATH}/.env.local
     ports:
       - 5000:5000
     depends_on:
@@ -40,5 +41,7 @@ services:
     build:
       context: ${COMMENTS_PROJECT_PATH}
       target: runner
+    env_file:
+      - ${COMMENTS_PROJECT_PATH}/.env.local
     ports:
       - 6000:6000
