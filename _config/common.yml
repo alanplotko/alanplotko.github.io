@@ -1,5 +1,16 @@
 # Build
-exclude: ["Gemfile", "Gemfile.lock", "node_modules", "docker/", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/", "gulpfile.js", "reports/", "package.json", "yarn.lock", "README.md", "assets/css/", "tests/"]
+exclude: [
+  # Ruby
+  "Gemfile", "Gemfile.lock",
+  # NodeJS
+  "node_modules", "package.json", "yarn.lock", "gulpfile.js",
+  # Misc
+  "docker/", "reports/", "tests/",
+  # Vendor
+  "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/",
+  # Assets
+  "assets/css/", "README.md"
+]
 include: [".nojekyll"]
 keep_files: [".git", "assets/css", "assets/js"]
 
@@ -21,7 +32,7 @@ events_origin: http://localhost:3000
 events_website_id: baf21bb8-48d2-424a-ba21-a6f5be16194fa
 # Comments
 comments_enabled: false
-comments_origin: http://localhost:6000
+comments_origin: http://localhost:3500
 comments_repo: alanplotko/alanplotko.github.io
 comments_repo_id: MDEwOlJlcG9zaXRvcnkyODY1NTk5OA==
 comments_category: 'Blog Post Discussions'

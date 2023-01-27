@@ -44,4 +44,4 @@ services:
     env_file:
       - ${COMMENTS_PROJECT_PATH}/.env.local
     ports:
-      - 6000:6000
+      - 3500:3500
