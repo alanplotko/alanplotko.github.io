@@ -6,46 +6,47 @@
     "author": "Alan Plotko <5394528+alanplotko@users.noreply.github.com>",
     "license": "MIT",
     "scripts": {
-        "yaml": "yarn yaml-dev & yarn yaml-staging & yarn yaml-prod",
-        "yaml-dev": "JEKYLL_ENV=development ./node_modules/.bin/gulp yaml",
-        "yaml-staging": "JEKYLL_ENV=staging ./node_modules/.bin/gulp yaml",
-        "yaml-prod": "JEKYLL_ENV=production ./node_modules/.bin/gulp yaml",
+        "dev": "gulp dev",
+        "staging": "gulp staging",
+        "prod": "gulp prod",
         "docker": "yarn docker-dev",
         "docker-dev": "docker compose -f ./docker/development.yml --env-file ./docker/config/.env.local up",
-        "dev": "JEKYLL_ENV=development ./node_modules/.bin/gulp build",
-        "staging": "JEKYLL_ENV=staging ./node_modules/.bin/gulp build",
-        "prod": "JEKYLL_ENV=production ./node_modules/.bin/gulp build",
         "watch": "yarn watch-dev",
-        "watch-dev": "JEKYLL_ENV=development ./node_modules/.bin/gulp watch",
-        "watch-staging": "JEKYLL_ENV=staging ./node_modules/.bin/gulp watch",
-        "serve": "yarn serve-dev",
-        "serve-dev": "JEKYLL_ENV=development ./node_modules/.bin/gulp serve",
-        "serve-staging": "JEKYLL_ENV=staging ./node_modules/.bin/gulp serve",
-        "serve-prod": "JEKYLL_ENV=production ./node_modules/.bin/gulp serve",
-        "test": "yarn lighthouse-all",
-        "lighthouse-all": "yarn lighthouse-desktop & yarn lighthouse-mobile",
-        "lighthouse-desktop": "./node_modules/.bin/lighthouse http://localhost:4000 --preset=desktop --quiet --chrome-flags='--headless' --view --output-path ./reports/lighthouse-desktop.html",
-        "lighthouse-mobile": "./node_modules/.bin/lighthouse http://localhost:4000 --quiet --chrome-flags='--headless' --view --output-path ./reports/lighthouse-mobile.html"
+        "watch-dev": "gulp watch",
+        "serve": "yarn dev && yarn serve-dev",
+        "serve-dev": "bundle exec jekyll serve --skip-initial-build --no-watch --config './_config/common.yml,./_config/development.yml'",
+        "lighthouse-desktop": "npx unlighthouse --site http://localhost:4000 --debug --no-cache --throttle --samples 3 --enable-javascript --desktop",
+        "lighthouse-mobile": "npx unlighthouse --site http://localhost:4000 --debug --no-cache --throttle --samples 3 --enable-javascript --mobiles"
     },
     "devDependencies": {
         "@alexlafroscia/yaml-merge": "^4.1.0",
+        "autoprefixer": "^10.4.13",
         "bootstrap": "^5.1.3",
+        "browser-sync": "^2.27.11",
         "child_process": "^1.0.2",
         "chrome-launcher": "^0.15.0",
-        "del": "^6.0.0",
+        "cssnano": "^5.1.14",
+        "del": "^7.0.0",
         "dotenv-cli": "^7.0.0",
+        "fancy-log": "^2.0.0",
         "fs": "^0.0.1-security",
         "glob": "^7.2.0",
         "gulp": "^4.0.2",
+        "gulp-concat": "^2.6.1",
         "gulp-htmlmin": "^5.0.1",
         "gulp-jsonmin": "^1.2.0",
+        "gulp-minify": "^3.1.0",
+        "gulp-postcss": "^9.0.1",
         "gulp-purgecss": "^4.1.3",
+        "gulp-run": "^1.7.1",
         "gulp-sass": "^5.0.0",
         "gulp-uglify": "^3.0.2",
+        "gulp-uglify-es": "^3.0.0",
         "lighthouse": "^9.2.0",
         "merge-stream": "^2.0.0",
         "normalize.css": "^8.0.1",
         "path": "^0.12.7",
+        "run-sequence": "^2.2.1",
         "sass": "^1.45.1",
         "url": "^0.11.0",
         "workbox-build": "^6.4.2",
@@ -54,5 +55,11 @@
     "resolutions": {
         "glob-parent": "^5.1.2"
     },
-    "dependencies": {}
+    "dependencies": {
+        "global": "^4.4.0",
+        "puppeteer": "^19.6.1"
+    },
+    "browserslist": [
+        "last 2 versions"
+    ]
 }

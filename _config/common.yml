@@ -3,13 +3,13 @@ exclude: [
   # Ruby
   "Gemfile", "Gemfile.lock",
   # NodeJS
-  "node_modules", "package.json", "yarn.lock", "gulpfile.js",
+  "node_modules", "package.json", "yarn.lock", "gulpfile.mjs",
   # Misc
   "docker/", "reports/", "tests/",
   # Vendor
   "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/",
   # Assets
-  "assets/css/", "README.md"
+  "assets/css/", "assets/js/", "README.md"
 ]
 include: [".nojekyll"]
 keep_files: [".git", "assets/css", "assets/js"]

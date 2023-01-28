@@ -7,11 +7,25 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_MULTIPLE_DATABASES: ${POSTGRES_MULTIPLE_DATABASES}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - ${POSTGRES_VOLUME_PATH}:/var/lib/postgresql/data
+      - ${POSTGRES_INIT_SCRIPTS_PATH}:/docker-entrypoint-initdb.d
+  pgadmin:
+    container_name: pgadmin-apblog
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_DISABLE_POSTFIX: true
+    ports:
+      - 5500:80
+    logging:
+      driver: none
+    depends_on:
+      - db
   analytics:
     container_name: analytics-apblog
     build:

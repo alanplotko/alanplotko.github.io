@@ -2,9 +2,9 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js" integrity="sha512-Kef5sc7gfTacR7TZKelcrRs15ipf7+t+n7Zh6mKNJbmW+/RRdCW9nwfLn4YX0s2nO6Kv5Y2ChqgIakaC6PW09A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {%- endif -%}
 {%- if page.layout == 'post' -%}
-<script defer type="text/javascript" src="/assets/js/claps.js"></script>
+<script defer type="text/javascript" src="/assets/js/posts.js"></script>
 {%- if site.comments_enabled -%}
-<script defer src="{{ site.comments_origin }}/client.js"
+<script defer type="text/javascript" src="{{ site.comments_origin }}/client.js"
         data-repo="{{ site.comments_repo }}"
         data-repo-id="{{ site.comments_repo_id }}"
         data-category="{{ site.comments_category }}"
@@ -14,7 +14,7 @@
         data-reactions-enabled="1"
         data-emit-metadata="0"
         data-input-position="top"
-        data-theme="preferred_color_scheme"
+        data-theme="light"
         data-lang="en"
         data-loading="lazy"
         crossorigin="anonymous"
@@ -22,22 +22,7 @@
 </script>
 {%- endif -%}
 {%- endif -%}
-{%- if jekyll.environment == 'production' -%}
-<script type="text/javascript">
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register("{{ site.url }}/sw.js", {
-                scope: "/"
-            });
-        });
-    }
-    {%- if page.url == '/' -%}
-    window.addEventListener('DOMContentLoaded', (event) => {
-        particlesJS.load("particles", "/assets/json/particlesjs-config.json");
-    });
-    {%- endif -%}
-</script>
-{%- elsif site.service_worker_enabled -%}
+{%- if jekyll.environment == 'production' or site.service_worker_enabled -%}
 <script type="text/javascript">
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
