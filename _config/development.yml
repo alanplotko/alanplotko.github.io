@@ -1,1 +1,4 @@
-serviceWorker: false
+service_worker_enabled: true
+events_enabled: true
+comments_enabled: true
+events_website_id: cda88270-a23a-41b1-8d0b-a81ca80f2111

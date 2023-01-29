@@ -1,0 +1,61 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: db-apblog
+    image: postgres:12-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_MULTIPLE_DATABASES: ${POSTGRES_MULTIPLE_DATABASES}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ${POSTGRES_VOLUME_PATH}:/var/lib/postgresql/data
+      - ${POSTGRES_INIT_SCRIPTS_PATH}:/docker-entrypoint-initdb.d
+  pgadmin:
+    container_name: pgadmin-apblog
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_DISABLE_POSTFIX: true
+    ports:
+      - 5500:80
+    logging:
+      driver: none
+    depends_on:
+      - db
+  analytics:
+    container_name: analytics-apblog
+    build:
+      context: ${ANALYTICS_PROJECT_PATH}
+      target: runner
+      args:
+        - DATABASE_TYPE=postgres
+    env_file:
+      - ${ANALYTICS_PROJECT_PATH}/.env.local
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+  api:
+    container_name: api-apblog
+    build:
+      context: ${API_PROJECT_PATH}
+      target: runner
+    env_file:
+      - ${API_PROJECT_PATH}/.env.local
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+  comments:
+    container_name: comments-apblog
+    build:
+      context: ${COMMENTS_PROJECT_PATH}
+      target: runner
+    env_file:
+      - ${COMMENTS_PROJECT_PATH}/.env.local
+    ports:
+      - 3500:3500
