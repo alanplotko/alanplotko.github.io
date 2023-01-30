@@ -16,12 +16,14 @@ services:
   pgadmin:
     container_name: pgadmin-apblog
     image: dpage/pgadmin4:latest
+    ports:
+      - 5500:80
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
       PGADMIN_DISABLE_POSTFIX: true
-    ports:
-      - 5500:80
+    volumes:
+      - ${PGADMIN_VOLUME_PATH}:/var/lib/pgadmin
     logging:
       driver: none
     depends_on:
