@@ -3,25 +3,25 @@ name: Build Jekyll and Deploy
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   jekyll:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v5
 
     - name: Set Up Ruby and Bundler
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7
+        ruby-version: 3.4
         bundler-cache: true
 
     - name: Set Up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v6
       with:
-        node-version: '15.x'
+        node-version: '24.x'
         cache: 'yarn'
 
     - name: Install Dependencies
@@ -31,7 +31,7 @@ jobs:
       run: yarn prod
 
     - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages
