@@ -15,7 +15,7 @@ jobs:
     - name: Set Up Ruby and Bundler
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.4
+        ruby-version: 2.7
         bundler-cache: true
 
     - name: Set Up Node.js
