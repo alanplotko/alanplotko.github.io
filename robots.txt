@@ -1,5 +1,8 @@
 ---
 layout: none
 ---
-User-agent: *
+User-Agent: *
+Content-Signal: ai-train=no, search=yes, ai-input=no
+Allow: /
+
 Sitemap: {{ site.url }}/sitemap.xml
